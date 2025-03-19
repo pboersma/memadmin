@@ -8,9 +8,9 @@ class FamilyMemberController
 {
     protected FamilyMemberService $familyMemberService;
 
-    public function __construct()
+    public function __construct(FamilyMemberService $familyMemberService)
     {
-        $this->familyMemberService = new FamilyMemberService();
+        $this->familyMemberService = $familyMemberService;
     }
 
     public function index()
