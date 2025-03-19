@@ -1,54 +1,18 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  # ────────────────────────────────────────────────────────────────────────────────
-  # PHP + Apache (Laravel App)
-  # ────────────────────────────────────────────────────────────────────────────────
-  laravel:
-    image: php:8.2-apache
-    container_name: laravel_app
-    # Mount your local Laravel project into the container
-    volumes:
-      - ./:/var/www/html
-    # Map port 80 on your machine to port 80 in the container
-    ports:
-      - "80:80"
+  mariadb:
+    image: mariadb:latest
+    container_name: local_mariadb
     environment:
-      # Update these as needed for your .env file inside Laravel
-      DB_CONNECTION: mysql
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_DATABASE: laravel_db
-      DB_USERNAME: laravel_user
-      DB_PASSWORD: secret
-    # Ensure the application waits for MariaDB to be ready
-    depends_on:
-      - db
-    # Example command to install deps & generate the Laravel key, then start Apache
-    command: bash -c "cd /var/www/html && \
-                      composer install && \
-                      php artisan key:generate && \
-                      apache2-foreground"
-
-  # ────────────────────────────────────────────────────────────────────────────────
-  # MariaDB (Database)
-  # ────────────────────────────────────────────────────────────────────────────────
-  db:
-    image: mariadb:10.7
-    container_name: laravel_db
-    # Expose 3306 if you want to connect from a DB client on your host
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: memadmin
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     ports:
       - "3306:3306"
-    environment:
-      MARIADB_ROOT_PASSWORD: root
-      MARIADB_DATABASE: laravel_db
-      MARIADB_USER: laravel_user
-      MARIADB_PASSWORD: secret
-    # Persists database data between container restarts
     volumes:
-      - db_data:/var/lib/mysql
+      - dbdata:/var/lib/mysql
 
 volumes:
-  db_data:
-    driver: local
-
+  dbdata:
