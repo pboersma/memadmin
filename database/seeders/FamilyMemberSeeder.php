@@ -15,11 +15,17 @@ class FamilyMemberSeeder extends Seeder
         DB::table('family_members')->insert([
             [
                 'name' => 'Peter Smith',
+                'birthdate' => '1990-01-01',
+                'relation_type' => 'Father',
+                'family_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Stefan Johnson',
+                'birthdate' => '1995-01-01',
+                'relation_type' => 'Son',
+                'family_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],

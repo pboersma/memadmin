@@ -17,4 +17,24 @@ class FamilyService
     {
         return $this->familyRepository->getAll();
     }
+
+    public function getFamily(int $id): object
+    {
+        return $this->familyRepository->get($id);
+    }
+
+    public function updateFamily(int $id, array $payload): void
+    {
+        $this->familyRepository->update($id, $payload);
+    }
+
+    public function deleteFamily(int $id): void
+    {
+        $this->familyRepository->delete($id);
+    }
+
+    public function createFamily(array $payload): void
+    {
+        $this->familyRepository->create($payload);
+    }
 }
