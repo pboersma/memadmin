@@ -60,6 +60,7 @@ class FamilyController extends Controller
     public function update(Request $request, int $id): RedirectResponse
     {
         $this->familyService->update($id, $request->all());
+
         return redirect()->route('families.index');
     }
 
@@ -69,8 +70,9 @@ class FamilyController extends Controller
     public function show(int $id): View
     {
         $family = $this->familyService->getById($id);
+        $family_members = $this->familyService->getFamilyMembers($id);
 
-        return view('panel.families.show', compact('family'));
+        return view('panel.families.show', compact(['family', 'family_members']));
     }
 
     /**

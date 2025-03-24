@@ -10,4 +10,9 @@ class FamilyService extends BaseService
     {
         parent::__construct($repository);
     }
+
+    public function getFamilyMembers($familyId)
+    {
+        return $this->repository->getFamilyMembers($familyId);
+    }
 }

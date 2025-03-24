@@ -43,4 +43,44 @@ class FamilyMemberController implements ControllerInterface
 
         return redirect()->route('family_members.index');
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function edit($id): View
+    {
+        $family_member = $this->familyMemberService->getById($id);
+
+        return view('panel.family_members.edit', compact('family_member'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(Request $request, int $id): RedirectResponse
+    {
+        $this->familyMemberService->update($id, $request->all());
+
+        return redirect()->route('family_members.index');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function show(int $id): View
+    {
+        $family_member = $this->familyMemberService->getById($id);
+
+        return view('panel.family_members.show', compact('family_member'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        $this->familyMemberService->delete($id);
+
+        return redirect()->route('family_members.index');
+    }
 }

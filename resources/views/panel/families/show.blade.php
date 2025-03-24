@@ -13,5 +13,14 @@
             <a href="{{ route('families.edit', $family->id) }}" class="btn btn-primary">Edit</a>
             <a href="{{ route('families.index') }}" class="btn btn-secondary">Back</a>
         </div>
+
+        <div>
+            <h5>Members</h5>
+            <ul>
+                @foreach ($family_members as $member)
+                    <li>{{ $member->name }}</li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 @endsection
