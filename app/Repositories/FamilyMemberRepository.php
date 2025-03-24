@@ -6,6 +6,9 @@ class FamilyMemberRepository extends BaseRepository
 {
     protected string $table = 'family_members';
 
+    /**
+     * @inheritDoc
+     */
     public function create(array $payload): void
     {
         $query = "INSERT INTO $this->table (name, family_id, created_at, updated_at) " .
@@ -18,6 +21,9 @@ class FamilyMemberRepository extends BaseRepository
         $stmt->execute();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function update(int $id, array $payload): void
     {
         $stmt = $this->pdo->prepare("UPDATE $this->table SET name = :name, updated_at = NOW() WHERE id = :id");

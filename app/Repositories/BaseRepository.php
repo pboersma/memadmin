@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Database;
+use App\Infrastructure\Database;
 use App\Interfaces\RepositoryInterface;
 use PDO;
 
@@ -16,10 +16,19 @@ abstract class BaseRepository implements RepositoryInterface
         $this->pdo = Database::connect();
     }
 
+    /**
+     * @inheritDoc
+     */
     abstract public function create(array $payload): void;
 
+    /**
+     * @inheritDoc
+     */
     abstract public function update(int $id, array $payload): void;
 
+    /**
+     * @inheritDoc
+     */
     public function getAll(): array
     {
         $stmt = $this->pdo->prepare("SELECT * FROM $this->table");
@@ -28,6 +37,9 @@ abstract class BaseRepository implements RepositoryInterface
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function get(int $id): object
     {
         $stmt = $this->pdo->prepare("SELECT * FROM $this->table WHERE id = :id");
@@ -37,6 +49,9 @@ abstract class BaseRepository implements RepositoryInterface
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete(int $id): void
     {
         $stmt = $this->pdo->prepare("DELETE FROM $this->table WHERE id = :id");

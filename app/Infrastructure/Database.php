@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Infrastructure;
 
 use PDO;
 use PDOException;
@@ -9,6 +9,15 @@ class Database
 {
     private static ?PDO $pdo = null;
 
+    /**
+     * Establish a connection to the database using PDO.
+     *
+     * If the connection has already been established, the existing instance will be returned.
+     *
+     * @return PDO The PDO instance for the database connection.
+     *
+     * @throws PDOException If the connection fails.
+     */
     public static function connect(): PDO
     {
         if (self::$pdo === null) {
