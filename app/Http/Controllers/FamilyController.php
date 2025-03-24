@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Services\FamilyService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View;
 
-class FamilyController implements ControllerInterface
+class FamilyController extends Controller
 {
     protected FamilyService $familyService;
 
@@ -16,49 +17,68 @@ class FamilyController implements ControllerInterface
         $this->familyService = $familyService;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function index(): View
     {
-        $families = $this->familyService->getAllFamilies();
+        $families = $this->familyService->getAll();
 
         return view('panel.families.index', compact('families'));
     }
 
+    /**
+     * @inheritDoc
+     */
     public function create(): View
     {
         return view('panel.families.create');
     }
-
+    /**
+     * @inheritDoc
+     */
     public function store(Request $request): RedirectResponse
     {
-        $this->familyService->createFamily($request->all());
+        $this->familyService->create($request->all());
 
         return redirect()->route('families.index');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function edit($id): View
     {
-        $family = $this->familyService->getFamily($id);
+        $family = $this->familyService->getById($id);
 
         return view('panel.families.edit', compact('family'));
     }
 
+    /**
+     * @inheritDoc
+     */
     public function update(Request $request, int $id): RedirectResponse
     {
-        $this->familyService->updateFamily($id, $request->all());
-
+        $this->familyService->update($id, $request->all());
         return redirect()->route('families.index');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function show(int $id): View
     {
-        $family = $this->familyService->getFamily($id);
+        $family = $this->familyService->getById($id);
 
         return view('panel.families.show', compact('family'));
     }
 
+    /**
+     * @inheritDoc
+     */
     public function destroy(int $id): RedirectResponse
     {
-        $this->familyService->deleteFamily($id);
+        $this->familyService->delete($id);
 
         return redirect()->route('families.index');
     }

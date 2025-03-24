@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-abstract class Controller
+use App\Interfaces\ControllerInterface;
+
+abstract class Controller implements ControllerInterface
 {
-    //
+    // No soul was found here.
 }

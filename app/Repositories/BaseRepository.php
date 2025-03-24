@@ -3,9 +3,10 @@
 namespace App\Repositories;
 
 use App\Database;
+use App\Interfaces\RepositoryInterface;
 use PDO;
 
-abstract class BaseRepository
+abstract class BaseRepository implements RepositoryInterface
 {
     protected PDO $pdo;
     protected string $table;
@@ -15,10 +16,9 @@ abstract class BaseRepository
         $this->pdo = Database::connect();
     }
 
+    abstract public function create(array $payload): void;
 
-    abstract protected function create(array $payload): void;
-
-    abstract protected function update(int $id, array $payload): void;
+    abstract public function update(int $id, array $payload): void;
 
     public function getAll(): array
     {
