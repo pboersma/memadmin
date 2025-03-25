@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div>
-        <a style="margin: 19px;" href="{{ route('family_members.create')}}" class="btn btn-primary">New Family</a>
+        <a style="margin: 19px;" href="{{ route('family_members.create')}}" class="btn btn-primary">
+            New Family Member
+        </a>
     </div>
     <table class="table">
         <thead>

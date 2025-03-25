@@ -10,9 +10,10 @@ class FamilyRepository extends BaseRepository
 
     public function create(array $payload): void
     {
-        $query = "INSERT INTO $this->table (name, created_at, updated_at) VALUES (:name, NOW(), NOW())";
+        $query = "INSERT INTO $this->table (name, address, created_at, updated_at) VALUES (:name, :address, NOW(), NOW())";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':name', $payload['name']);
+        $stmt->bindParam(':address', $payload['address']);
 
         $stmt->execute();
     }

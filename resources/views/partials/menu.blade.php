@@ -8,15 +8,19 @@
         <li class="nav-item">
             <a href="{{ route('families.index') }}"
                 class="nav-link {{ request()->routeIs('families.index') ? 'active' : 'text-white' }}">
-                <i class="fa-solid fa-users pe-none me-2"></i>
                 Families
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ route('family_members.index') }}"
                 class="nav-link {{ request()->routeIs('family_members.index') ? 'active' : 'text-white' }}">
-                <i class="fa-solid fa-user pe-none me-2"></i>
                 Family Members
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('member_types.index') }}"
+                class="nav-link {{ request()->routeIs('member_types.index') ? 'active' : 'text-white' }}">
+                Member Types
             </a>
         </li>
     </ul>

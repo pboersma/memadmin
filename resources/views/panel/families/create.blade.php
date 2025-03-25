@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <form action="{{ route('families.store') }}" method="POST">
@@ -6,6 +6,11 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Address</label>
+            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

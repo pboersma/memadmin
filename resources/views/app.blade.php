@@ -20,11 +20,7 @@
 </head>
 
 <body class="h-100 d-flex">
-    @include('partials.menu')
-
-    <div class="container p-5">
-        @yield('content')
-    </div>
+    @yield('layout')
 </body>
 
 </html>

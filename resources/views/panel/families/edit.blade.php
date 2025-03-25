@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <form action="{{ route('families.update', $family->id) }}" method="POST">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div>
@@ -9,6 +9,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Address</th>
                 <th scope="col">UpdatedAt</th>
                 <th scope="col">CreatedAt</th>
             </tr>
@@ -18,6 +19,7 @@
             <tr>
                 <th scope="row">{{ $family->id }}</th>
                 <td>{{ $family->name }}</td>
+                <td>{{ $family->address }}</td>
                 <td>{{ $family->updated_at }}</td>
                 <td>{{ $family->created_at }}</td>
                 <td>

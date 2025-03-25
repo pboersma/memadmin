@@ -11,11 +11,13 @@ class FamilyMemberRepository extends BaseRepository
      */
     public function create(array $payload): void
     {
-        $query = "INSERT INTO $this->table (name, family_id, created_at, updated_at) " .
-                 "VALUES (:name, :family_id, NOW(), NOW())";
+        $query = "INSERT INTO $this->table (name, birthdate, family_id, created_at, updated_at) " .
+                 "VALUES (:name, :birthdate, :family_id, NOW(), NOW())";
 
         $stmt = $this->pdo->prepare($query);
+
         $stmt->bindParam(':name', $payload['name']);
+        $stmt->bindParam(':birthdate', $payload['birthdate']);
         $stmt->bindParam(':family_id', $payload['family_id']);
 
         $stmt->execute();
