@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Infrastructure\Database;
+use App\Helpers\Database;
 use App\Interfaces\RepositoryInterface;
 use PDO;
 
