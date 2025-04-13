@@ -10,8 +10,17 @@
 
         <div class="form-group">
             <label for="name">Birthdate</label>
-            <input type="date" class="form-control" id="birtdate" name="birtdate" placeholder="Enter birtdate">
+            <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Enter birthdate">
         </div>
+
+        <div class="form-group">
+            <label for="relation_type">Relation Type</label>
+            <select class="form-control" id="relation_type" name="relation_type">
+                <option value="">Select Relation Type</option>
+                <option value="son">Son</option>
+            </select>
+        </div>
+
 
         <div class="form-group">
             <label for="family">Family</label>
@@ -23,7 +32,15 @@
             </select>
         </div>
 
-
+        <div class="form-group">
+            <label for="member_type">Member Type</label>
+            <select class="form-control" id="member_type" name="member_type_id">
+                <option value="">Select Member Type</option>
+                @foreach($member_types as $member_type)
+                    <option value="{{ $member_type->id }}">{{ $member_type->description }}</option>
+                @endforeach
+            </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

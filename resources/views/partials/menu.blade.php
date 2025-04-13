@@ -30,9 +30,8 @@
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ Auth::user()->avatar_url ?? 'https://github.com/mdo.png' }}" alt="" width="32" height="32"
-                class="rounded-circle me-2">
-            <strong>{{ Auth::user()->name ?? 'Guest' }}</strong>
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>User</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -42,7 +41,7 @@
                 <hr class="dropdown-divider">
             </li>
             <li>
-                <form>
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button class="dropdown-item" type="submit">Sign out</button>
                 </form>

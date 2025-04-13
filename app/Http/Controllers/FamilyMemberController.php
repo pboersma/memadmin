@@ -8,16 +8,20 @@ use Illuminate\Contracts\View\View;
 use App\Interfaces\ControllerInterface;
 use App\Services\FamilyMemberService;
 use App\Services\FamilyService;
+use App\Services\MemberTypeService;
 
 class FamilyMemberController implements ControllerInterface
 {
     protected FamilyMemberService $familyMemberService;
     protected FamilyService $familyService;
 
-    public function __construct(FamilyMemberService $familyMemberService, FamilyService $familyService)
+    protected MemberTypeService $memberTypeService;
+
+    public function __construct(FamilyMemberService $familyMemberService, FamilyService $familyService, MemberTypeService $memberTypeService)
     {
         $this->familyMemberService = $familyMemberService;
         $this->familyService = $familyService;
+        $this->memberTypeService = $memberTypeService;
     }
 
     /**
@@ -33,8 +37,9 @@ class FamilyMemberController implements ControllerInterface
     public function create(): View
     {
         $families = $this->familyService->getAll();
+        $member_types = $this->memberTypeService->getAll();
 
-        return view('panel.family_members.create', compact('families'));
+        return view('panel.family_members.create', compact('families'), compact('member_types'));
     }
 
     public function store(Request $request): RedirectResponse

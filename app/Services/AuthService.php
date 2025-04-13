@@ -14,13 +14,21 @@ class AuthService
         $this->userRepository = $userRepository;
     }
 
-    public function attemptLogin(string $email, string $password, string $sessionId, string $ip, string $userAgent): bool
-    {
+    public function attemptLogin(
+        string $email,
+        string $password,
+        string $sessionId,
+        string $ip,
+        string $userAgent,
+    ): bool {
         $user = $this->userRepository->findByEmail($email);
 
         if (!$user || !password_verify($password, $user['password'])) {
             return false;
         }
+
+        // Regenerate session to prevent fixation
+        Session::regenerate();
 
         // Set session variables
         Session::put('user_id', $user['id']);
@@ -30,14 +38,14 @@ class AuthService
         $payload = json_encode(['_token' => csrf_token()]);
         $lastActivity = time();
 
-        // $this->userRepository->storeSession(
-        //     $sessionId,
-        //     $user['id'],
-        //     $ip,
-        //     $userAgent,
-        //     $payload,
-        //     $lastActivity
-        // );
+        $this->userRepository->storeSession(
+            $sessionId,
+            $user['id'],
+            $ip,
+            $userAgent,
+            $payload,
+            $lastActivity
+        );
 
         return true;
     }

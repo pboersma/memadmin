@@ -28,7 +28,7 @@ class UserRepository extends BaseRepository
 
     public function update(int $id, array $payload): void
     {
-
+        return;
     }
 
     public function findByEmail(string $email): ?array
@@ -45,6 +45,12 @@ class UserRepository extends BaseRepository
         $stmt = $this->pdo->prepare("
             INSERT INTO sessions (id, user_id, ip_address, user_agent, payload, last_activity)
             VALUES (?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+                user_id = VALUES(user_id),
+                ip_address = VALUES(ip_address),
+                user_agent = VALUES(user_agent),
+                payload = VALUES(payload),
+                last_activity = VALUES(last_activity)
         ");
 
         $stmt->execute([
