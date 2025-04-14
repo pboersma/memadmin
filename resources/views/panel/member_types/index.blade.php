@@ -22,6 +22,15 @@
                     <td>{{ $member_type->description }}</td>
                     <td>{{ $member_type->updated_at }}</td>
                     <td>{{ $member_type->created_at }}</td>
+                    <td>
+                        <form action="{{ route('member_types.destroy', $member_type->id) }}" method="POST">
+                            <a href="{{ route('member_types.show', $member_type->id) }}" class="btn btn-info">Show</a>
+                            <a href="{{ route('member_types.edit', $member_type->id) }}" class="btn btn-primary">Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
