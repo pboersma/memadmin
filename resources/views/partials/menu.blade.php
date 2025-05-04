@@ -23,6 +23,12 @@
                 Member Types
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('contributions.index') }}"
+                class="nav-link {{ request()->routeIs('contributions.index') ? 'active' : 'text-white' }}">
+                Contributions
+            </a>
+        </li>
     </ul>
 
     <hr>
@@ -34,12 +40,6 @@
             <strong>User</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
             <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
