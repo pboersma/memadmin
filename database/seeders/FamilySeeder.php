@@ -15,26 +15,31 @@ class FamilySeeder extends Seeder
         DB::table('families')->insert([
             [
                 'name' => 'Smith',
+                'address' => '123 Main St, Springfield',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Johnson',
+                'address' => '456 Elm St, Springfield',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Williams',
+                'address' => '789 Oak St, Springfield',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Brown',
+                'address' => '101 Pine St, Springfield',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Davis',
+                'address' => '202 Maple St, Springfield',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

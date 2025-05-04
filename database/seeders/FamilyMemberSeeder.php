@@ -17,6 +17,7 @@ class FamilyMemberSeeder extends Seeder
                 'name' => 'Peter',
                 'birthdate' => '1990-01-01',
                 'relation_type' => 'Father',
+                'member_type_id' => 1,
                 'family_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -25,6 +26,7 @@ class FamilyMemberSeeder extends Seeder
                 'name' => 'Stefan',
                 'birthdate' => '1995-01-01',
                 'relation_type' => 'Son',
+                'member_type_id' => 3,
                 'family_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
