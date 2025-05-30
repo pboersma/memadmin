@@ -8,6 +8,8 @@ Daarnaast kunnen de soorten leden en de verschillende staffels voor de contribut
 
 De database zal er ongeveer zo uitzien. De relaties zijn verplicht.
 
+![diagram](./jpeg-650.jpeg)
+
 **Relaties ledenadministratie.** (Bron: OGN.)
 
 ---
@@ -85,6 +87,7 @@ Een boekjaar wordt gebruikt om contributiebedragen toe te wijzen aan een specifi
 
 ---
 
+![diagram2](./jpeg-651.jpeg)
 ## Logica van de applicatie Ledenadministratie
 (Bron: OGN.)
 
