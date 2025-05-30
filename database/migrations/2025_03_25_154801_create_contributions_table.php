@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('contributions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('age');
+            $table->string('member_type'); // Jeugd, Junior, Senior.
+            $table->foreignId('member_type_id')
+                ->constrained('member_types')
+                ->cascadeOnDelete();
+            $table->unsignedInteger('amount');
+            $table->foreignId('fiscal_year_id')
+                ->constrained('fiscal_years')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -14,27 +14,17 @@ class MemberTypeSeeder extends Seeder
     {
         DB::table('member_types')->insert([
             [
-                'description' => 'Jeugd',
+                'description' => 'Student-lid',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'description' => 'Aspirant',
+                'description' => 'Erelid',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'description' => 'Junior',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'description' => 'Senior',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'description' => 'Oudere',
+                'description' => 'Familie-lid',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

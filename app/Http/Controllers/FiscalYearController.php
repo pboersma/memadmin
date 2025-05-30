@@ -20,13 +20,13 @@ class FiscalYearController
 
     public function set(Request $request): RedirectResponse
     {
-        $year = (int) $request->input('year');
+        $year = (int) $request->input('fiscal_year');
 
         if (!$this->fiscalYearService->existsByYear($year)) {
             return redirect()->back()->withErrors(['year' => 'Invalid Fiscal Year.']);
         }
 
-        session(key: ['fiscal_year' => $year]);
+        session(['fiscal_year' => $year]);
 
         return redirect()->back()->with('success', 'Fiscal year set successfully.');
     }

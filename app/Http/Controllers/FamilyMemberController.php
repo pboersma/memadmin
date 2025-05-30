@@ -17,8 +17,11 @@ class FamilyMemberController implements ControllerInterface
 
     protected MemberTypeService $memberTypeService;
 
-    public function __construct(FamilyMemberService $familyMemberService, FamilyService $familyService, MemberTypeService $memberTypeService)
-    {
+    public function __construct(
+        FamilyMemberService $familyMemberService,
+        FamilyService $familyService,
+        MemberTypeService $memberTypeService
+    ) {
         $this->familyMemberService = $familyMemberService;
         $this->familyService = $familyService;
         $this->memberTypeService = $memberTypeService;
@@ -34,6 +37,9 @@ class FamilyMemberController implements ControllerInterface
         return view('panel.family_members.index', compact('family_members'));
     }
 
+    /**
+     * @inheritDoc
+     */
     public function create(): View
     {
         $families = $this->familyService->getAll();
@@ -75,8 +81,15 @@ class FamilyMemberController implements ControllerInterface
     public function show(int $id): View
     {
         $family_member = $this->familyMemberService->getById($id);
+        $contribution = null;
 
-        return view('panel.family_members.show', compact('family_member'));
+        return view(
+            'panel.family_members.show',
+            compact(
+                'family_member',
+                'contribution'
+            )
+        );
     }
 
     /**

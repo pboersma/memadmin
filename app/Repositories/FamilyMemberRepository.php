@@ -37,4 +37,27 @@ class FamilyMemberRepository extends BaseRepository
 
         $stmt->execute();
     }
+
+    public function getAll(): array
+    {
+        $query = "SELECT fm.*, f.name AS family_name
+              FROM {$this->table} fm
+              JOIN families f ON fm.family_id = f.id";
+
+        $stmt = $this->pdo->query($query);
+        $results = [];
+
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $family = (object) [
+                'id' => $row['family_id'],
+                'name' => $row['family_name'],
+            ];
+
+            $familyMember = (object) $row;
+            $familyMember->family = $family;
+            $results[] = $familyMember;
+        }
+
+        return $results;
+    }
 }

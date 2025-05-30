@@ -1,38 +1,76 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div>
-        <a style="margin: 19px;" href="{{ route('family_members.create')}}" class="btn btn-primary">
-            New Family Member
-        </a>
+    <div class="container py-4">
+        {{-- Add Button --}}
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ route('family_members.create') }}" class="btn btn-primary rounded-pill shadow-sm">
+                <i class="fa-solid fa-plus me-2"></i> Nieuw Familielid
+            </a>
+        </div>
+
+        {{-- Card --}}
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
+                <h5 class="mb-0 text-primary fw-semibold">
+                    <i class="fa-solid fa-users me-2 text-secondary"></i> Family Members
+                </h5>
+            </div>
+
+            <div class="card-body px-4">
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead class="table-light text-secondary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Firstname</th>
+                                <th scope="col">Lastname</th>
+                                <th scope="col">Updated at</th>
+                                <th scope="col">Created at</th>
+                                <th scope="col" class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($family_members as $family_member)
+                                <tr>
+                                    <td class="text-muted">{{ $family_member->id }}</td>
+                                    <td>{{ $family_member->name }}</td>
+                                    <td>{{ $family_member->family_name }}</td>
+                                    <td><span
+                                            class="badge bg-light text-dark">{{ $family_member->updated_at }}</span>
+                                    </td>
+                                    <td><span
+                                            class="badge bg-light text-dark">{{ $family_member->created_at }}</span>
+                                    </td>
+                                    <td class="text-end">
+                                        <form action="{{ route('family_members.destroy', $family_member->id) }}" method="POST"
+                                            class="d-inline-flex gap-1">
+                                            <a href="{{ route('family_members.show', $family_member->id) }}"
+                                                class="btn btn-sm btn-outline-info rounded-pill">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('family_members.edit', $family_member->id) }}"
+                                                class="btn btn-sm btn-outline-primary rounded-pill">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill"
+                                                onclick="return confirm('Weet je zeker dat je dit familielid wilt verwijderen?')">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted py-4">Geen familieleden gevonden.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">UpdatedAt</th>
-                <th scope="col">CreatedAt</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($family_members as $family_member)
-                <tr>
-                    <th scope="row">{{ $family_member->id }}</th>
-                    <td>{{ $family_member->name }}</td>
-                    <td>{{ $family_member->updated_at }}</td>
-                    <td>{{ $family_member->created_at }}</td>
-                    <td>
-                        <form action="{{ route('family_members.destroy', $family_member->id) }}" method="POST">
-                            <a href="{{ route('family_members.show', $family_member->id) }}" class="btn btn-info">Show</a>
-                            <a href="{{ route('family_members.edit', $family_member->id) }}" class="btn btn-primary">Edit</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 @endsection
