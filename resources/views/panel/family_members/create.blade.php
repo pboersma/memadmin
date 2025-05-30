@@ -3,26 +3,25 @@
 @section('content')
     <form action="{{ route('family_members.store') }}" method="POST">
         @csrf
-        <div class="form-group">
+        <div class="mb-3">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
             <label for="name">Birthdate</label>
             <input type="date" class="form-control" id="birthdate" name="birthdate" placeholder="Enter birthdate">
         </div>
 
-        <div class="form-group">
-            <label for="relation_type">Relation Type</label>
-            <select class="form-control" id="relation_type" name="relation_type">
-                <option value="">Select Relation Type</option>
+        <div class="mb-3">
+            <label for="member_type">Member Type</label>
+            <select class="form-control" id="member_type" name="member_type">
+                <option value="">Select Member Type</option>
                 <option value="son">Son</option>
             </select>
         </div>
 
-
-        <div class="form-group">
+        <div class="mb-3">
             <label for="family">Family</label>
             <select class="form-control" id="family" name="family_id">
                 <option value="">Select family</option>
@@ -32,7 +31,7 @@
             </select>
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
             <label for="member_type">Member Type</label>
             <select class="form-control" id="member_type" name="member_type_id">
                 <option value="">Select Member Type</option>

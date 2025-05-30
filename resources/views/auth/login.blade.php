@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="alert alert-primary" role="alert">
-        Email: <strong>admin@admin.com</strong>
-        Password: <strong>admin!</strong>
+        <strong>Gebruiker Beheerder:</strong><br>
+        Email: <strong>beheerder@memadmin.com</strong>
+        Password: <strong>beheerder!</strong>
     </div>
     <form action="{{ route('login') }}" method="post">
         @csrf

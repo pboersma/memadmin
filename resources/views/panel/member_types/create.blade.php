@@ -3,7 +3,7 @@
 @section('content')
     <form action="{{ route('member_types.store') }}" method="POST">
         @csrf
-        <div class="form-group">
+        <div class="mb-3">
             <label for="name">Description</label>
             <input type="text" class="form-control" id="description" name="description" placeholder="Enter description">
             </select>

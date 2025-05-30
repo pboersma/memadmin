@@ -29,7 +29,13 @@ class FamilyRepository extends BaseRepository
 
     public function getFamilyMembers(int $familyId): array
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM family_members WHERE family_id = :family_id");
+        $stmt = $this->pdo->prepare("SELECT
+            fm.*,
+            mt.description AS member_type_description
+        FROM family_members fm
+        JOIN member_types mt ON fm.member_type_id = mt.id
+        WHERE fm.family_id = :family_id");
+
         $stmt->bindParam(':family_id', $familyId);
         $stmt->execute();
 

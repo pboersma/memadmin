@@ -3,12 +3,12 @@
 @section('content')
     <form action="{{ route('families.store') }}" method="POST">
         @csrf
-        <div class="form-group">
+        <div class="mb-3">
             <label for="name">Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
         </div>
 
-        <div class="form-group">
+        <div class="mb-3">
             <label for="name">Address</label>
             <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
         </div>

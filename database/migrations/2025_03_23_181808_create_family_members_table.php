@@ -15,12 +15,19 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('birthdate');
-            $table->string('relation_type');
+
+            // Father, Son, Mother, Daugher etc.
+            $table->string('member_type');
+
+            // Family Relation
             $table->foreignId('family_id')
                 ->constrained('families')
                 ->cascadeOnDelete();
+
+            // Member Type Relation
             $table->foreignId('member_type_id')
                 ->constrained('member_types');
+
             $table->timestamps();
         });
     }

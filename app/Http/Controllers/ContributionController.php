@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\MemberTypeService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View;
@@ -11,10 +12,14 @@ use App\Services\ContributionService;
 class ContributionController implements ControllerInterface
 {
     protected ContributionService $contributionService;
+    protected MemberTypeService $memberTypeService;
 
-    public function __construct(ContributionService $contributionService)
-    {
+    public function __construct(
+        ContributionService $contributionService,
+        MemberTypeService $memberTypeService
+    ) {
         $this->contributionService = $contributionService;
+        $this->memberTypeService = $memberTypeService;
     }
 
     /**
@@ -29,7 +34,9 @@ class ContributionController implements ControllerInterface
 
     public function create(): View
     {
-        return view('panel.contributions.create');
+        $member_types = $this->memberTypeService->getAll();
+
+        return view('panel.contributions.create', compact('member_types'));
     }
 
     public function store(Request $request): RedirectResponse
