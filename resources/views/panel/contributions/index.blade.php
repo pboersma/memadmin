@@ -19,7 +19,7 @@
             @foreach ($contributions as $contribution)
                 <tr>
                     <th scope="row">{{ $contribution->id }}</th>
-                    <td>{{ $contribution->description }}</td>
+                    <td>{{ $contribution->member_type }}</td>
                     <td>{{ $contribution->updated_at }}</td>
                     <td>{{ $contribution->created_at }}</td>
                     <td>

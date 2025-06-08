@@ -40,13 +40,22 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * @inheritDoc
      */
-    public function get(int $id): object
+    /**
+     * Get a single record by a given column and value.
+     *
+     * @param mixed $value   The value to search for.
+     * @param string $column The column to search in (default: 'id').
+     *
+     * @return object|null   The fetched record or null if not found.
+     */
+    public function get(mixed $value, string $column = 'id'): ?object
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM $this->table WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $query = "SELECT * FROM {$this->table} WHERE {$column} = :value LIMIT 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':value', $value);
         $stmt->execute();
 
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        return $stmt->fetch(PDO::FETCH_OBJ) ?: null;
     }
 
     /**

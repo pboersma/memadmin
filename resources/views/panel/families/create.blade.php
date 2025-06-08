@@ -1,18 +1,51 @@
 @extends('layouts.admin')
 
 @section('content')
-    <form action="{{ route('families.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
-        </div>
+    <div class="container py-4">
+        {{-- Card --}}
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
+                <h5 class="mb-0 text-primary fw-semibold">
+                    <i class="fa-solid fa-plus me-2 text-success"></i> Nieuwe Familie Aanmaken
+                </h5>
+            </div>
 
-        <div class="mb-3">
-            <label for="name">Address</label>
-            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
-        </div>
+            <div class="card-body px-4 py-4">
+                <form action="{{ route('families.store') }}" method="POST" class="row g-3">
+                    @csrf
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+                    {{-- Naam --}}
+                    <div class="col-md-6">
+                        <label for="name" class="form-label fw-semibold">Naam</label>
+                        <input type="text" id="name" name="name" value="{{ old('name') }}"
+                            class="form-control @error('name') is-invalid @enderror" placeholder="Bijv. Familie Jansen">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Adres --}}
+                    <div class="col-md-6">
+                        <label for="address" class="form-label fw-semibold">Adres</label>
+                        <input type="text" id="address" name="address" value="{{ old('address') }}"
+                            class="form-control @error('address') is-invalid @enderror"
+                            placeholder="Bijv. Dorpsstraat 1, 1234 AB Utrecht">
+                        @error('address')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    {{-- Actieknoppen --}}
+                    <div class="col-12 d-flex justify-content-end mt-4 gap-2">
+                        <a href="{{ route('families.index') }}" class="btn btn-outline-secondary rounded-pill">
+                            <i class="fa-solid fa-arrow-left me-1"></i> Terug
+                        </a>
+                        <button type="submit" class="btn btn-success rounded-pill">
+                            <i class="fa-solid fa-check me-1"></i> Aanmaken
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

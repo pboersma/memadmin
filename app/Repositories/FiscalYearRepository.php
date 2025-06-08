@@ -34,13 +34,14 @@ class FiscalYearRepository extends BaseRepository
         $stmt->execute();
     }
 
-    public function existsByYear(int $year): bool
+    public function getByYear(int $year): object
     {
-        $query = "SELECT COUNT(*) FROM {$this->table} WHERE year = :year LIMIT 1";
+        $query = "SELECT * FROM {$this->table} WHERE year = :year LIMIT 1";
         $stmt = $this->pdo->prepare($query);
+
         $stmt->bindParam(':year', $year, PDO::PARAM_INT);
         $stmt->execute();
 
-        return (bool) $stmt->fetchColumn();
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }

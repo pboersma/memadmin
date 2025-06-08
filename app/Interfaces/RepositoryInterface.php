@@ -12,13 +12,14 @@ interface RepositoryInterface
     public function getAll(): array;
 
     /**
-     * Retrieve a single record by its unique identifier.
+     * Retrieve a single record by a given column and value.
      *
-     * @param int $id
+     * @param mixed $value   The value to search for.
+     * @param string $column The column to search in (default: 'id').
      *
-     * @return object
+     * @return object|null
      */
-    public function get(int $id): object;
+    public function get(mixed $value, string $column = 'id'): ?object;
 
     /**
      * Create a new record with the given data.

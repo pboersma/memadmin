@@ -17,7 +17,7 @@ The application is a membership administration system (Ledenadministratie) desig
     - Base contribution of €100 with discounts depending on age and role
 - Role-based login system
 - Secure form handling using prepared statements
-- MVC architecture using Larave
+- MVC architecture using Laravel
 
 ## Optimizations
 This project uses industry-standard design patterns to improve the **scalability, maintainability, and testability** of the application. The patterns are categorized as follows:

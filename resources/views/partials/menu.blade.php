@@ -41,7 +41,7 @@
                 class="form-select form-select-sm bg-dark text-white border-secondary" onchange="this.form.submit()">
                 @foreach($fiscalYears as $fiscalYear)
                     <option value="{{ $fiscalYear->year }}"
-                        {{ session('fiscal_year') == $fiscalYear->year ? 'selected' : '' }}>
+                        {{ session('fiscal_year')->year == $fiscalYear->year ? 'selected' : '' }}>
                         {{ $fiscalYear->year }}
                     </option>
                 @endforeach

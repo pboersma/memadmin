@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Services\FamilyService;
 use App\Services\FiscalYearService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\View\View;
 
 class FiscalYearController
 {
@@ -22,11 +19,13 @@ class FiscalYearController
     {
         $year = (int) $request->input('fiscal_year');
 
-        if (!$this->fiscalYearService->existsByYear($year)) {
+        $set_year = $this->fiscalYearService->getByYear($year);
+
+        if (!$set_year) {
             return redirect()->back()->withErrors(['year' => 'Invalid Fiscal Year.']);
         }
 
-        session(['fiscal_year' => $year]);
+        session(['fiscal_year' => $set_year]);
 
         return redirect()->back()->with('success', 'Fiscal year set successfully.');
     }

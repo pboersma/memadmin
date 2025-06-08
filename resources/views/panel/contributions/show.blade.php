@@ -6,7 +6,7 @@
             Contribution
         </div>
         <div class="card-body">
-            <h5 class="card-title">Description: {{ $contribution->description }}</h5>
+            <h5 class="card-title">Description: {{ $contribution->member_type }}</h5>
             <p class="card-text">Created at: {{ $contribution->created_at }}</p>
             <p class="card-text">Updated at: {{ $contribution->updated_at }}</p>
             <a href="{{ route('contributions.edit', $contribution->id) }}" class="btn btn-primary">Edit</a>

@@ -7,7 +7,7 @@
         <div class="mb-3">
             <label for="name">Description</label>
             <input type="text" class="form-control" id="description" name="description"
-                value="{{ $contribution->description }}" placeholder="Enter description">
+                value="{{ $contribution->member_type }}" placeholder="Enter description">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

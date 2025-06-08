@@ -11,8 +11,15 @@ class FiscalYearService extends BaseService
         parent::__construct($repository);
     }
 
-    public function existsByYear(int $year): bool
+    /**
+     * Get a fiscal year by its year value.
+     *
+     * @param int $year
+     *
+     * @return object
+     */
+    public function getByYear(int $year): object
     {
-        return $this->repository->existsByYear($year);
+        return $this->repository->getByYear($year);
     }
 }

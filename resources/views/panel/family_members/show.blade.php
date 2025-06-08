@@ -28,7 +28,7 @@
                             <li class="list-group-item border-0 px-0 py-2"><strong>Birthdate:</strong>
                                 {{ $family_member->birthdate }}</li>
                             <li class="list-group-item border-0 px-0 py-2"><strong>Member Type:</strong>
-                                {{ $family_member->memberType->description ?? 'Unknown' }}</li>
+                                {{ $family_member->member_type->description ?? 'Unknown' }}</li>
                         </ul>
                     </div>
 
@@ -37,7 +37,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="fw-semibold text-muted text-uppercase mb-0">
                                 <i class="fa-solid fa-euro-sign me-2 text-primary"></i> Contribution
-                                {{ session('fiscal_year') }}
+                                {{ session('fiscal_year')->year }}
                             </h6>
                             <i class="fa-solid fa-circle-info text-muted" data-bs-toggle="tooltip"
                                 title="Vastgesteld bedrag per lid voor dit boekjaar."></i>
@@ -48,21 +48,21 @@
                                 <div class="card-body py-3 px-4">
                                     <div class="mb-2 d-flex align-items-center">
                                         <i class="fa-regular fa-calendar me-2 text-secondary"></i>
-                                        <span>Age: <strong>{{ $contribution['leeftijd'] }}</strong> y/o</span>
+                                        <span>Age: <strong>{{ $contribution->age }}</strong> y/o</span>
                                     </div>
                                     <div class="mb-2 d-flex align-items-center">
                                         <i class="fa-solid fa-user-tag me-2 text-secondary"></i>
-                                        <span>Type: <strong>{{ $contribution['soort_lid'] }}</strong></span>
+                                        <span>Type: <strong>{{ $contribution->member_type }}</strong></span>
                                     </div>
                                     <div class="mb-2 d-flex align-items-center">
                                         <i class="fa-solid fa-percent me-2 text-secondary"></i>
-                                        <span>Discount: <strong>{{ $contribution['korting'] }}%</strong></span>
+                                        <span>Discount: <strong>{{ $contribution->discount->discount }}%</strong></span>
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <i class="fa-solid fa-coins me-2 text-secondary"></i>
                                         <span>Amount:
                                             <span class="badge bg-primary fs-6 rounded-pill px-3">
-                                                €{{ number_format($contribution['bedrag'], 2) }}
+                                                €{{ number_format($contribution->amount, 2) }}
                                             </span>
                                         </span>
                                     </div>
@@ -71,14 +71,16 @@
                         @else
                             <div class="alert alert-warning d-flex align-items-center mt-2 rounded-3">
                                 <i class="fa-solid fa-circle-exclamation me-2 text-warning"></i>
-                                No Contribution set for {{ session('fiscal_year') }}.
+                                No Contribution set for {{ session('fiscal_year')->year }}.
                             </div>
+
+                            <a href="{{ route('contributions.create', ['birthdate' => $family_member->birthdate, 'member_type_id' => 1]) }}"
+                                class="btn btn-outline-primary w-100 mt-3 rounded-pill">
+                                <i class="fa-solid fa-plus me-1"></i> Set Contribution
+                            </a>
                         @endif
 
-                        <a href="{{ route('contributions.create', ['family_member_id' => $family_member->id]) }}"
-                            class="btn btn-outline-primary w-100 mt-3 rounded-pill">
-                            <i class="fa-solid fa-plus me-1"></i> Set Contribution
-                        </a>
+
                     </div>
                 </div>
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('contributions', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('age');
-            $table->string('member_type'); // Jeugd, Junior, Senior.
+            $table->string('member_type');
             $table->foreignId('member_type_id')
                 ->constrained('member_types')
                 ->cascadeOnDelete();
