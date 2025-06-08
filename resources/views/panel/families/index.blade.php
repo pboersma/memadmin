@@ -25,6 +25,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Naam</th>
                                 <th scope="col">Adres</th>
+                                <th scope="col">Contributie</th>
                                 <th scope="col">Laatst bijgewerkt</th>
                                 <th scope="col">Aangemaakt op</th>
                                 <th scope="col" class="text-end">Acties</th>
@@ -36,6 +37,7 @@
                                     <td class="text-muted">{{ $family->id }}</td>
                                     <td>{{ $family->name }}</td>
                                     <td>{{ $family->address }}</td>
+                                    <td>€ {{ number_format($family->total_contribution ?? 0, 2, ',', '.') }}</td>
                                     <td><span class="badge bg-light text-dark">{{ $family->updated_at }}</span>
                                     </td>
                                     <td><span class="badge bg-light text-dark">{{ $family->created_at }}</span>

@@ -9,12 +9,9 @@ The application is a membership administration system (Ledenadministratie) desig
     - Families
     - Family members
     - Member types
-    - Contribution scales
-    - Financial years
-- Contribution calculation based on:
-    - Age of the member
-    - Type of membership
-    - Base contribution of €100 with discounts depending on age and role
+    - Contributions
+    - Fiscal Years
+- Contribution calculation based on age of the member
 - Role-based login system
 - Secure form handling using prepared statements
 - MVC architecture using Laravel

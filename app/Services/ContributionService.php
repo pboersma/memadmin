@@ -36,4 +36,9 @@ class ContributionService extends BaseService
 
         return $contribution;
     }
+
+    public function getContributionForMember(int $memberTypeId, int $age, int $fiscalYearId): ?object
+    {
+        return $this->repository->findByTypeAndAgeAndYear($memberTypeId, $age, $fiscalYearId);
+    }
 }

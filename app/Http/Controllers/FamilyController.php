@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Services\ContributionService;
 use App\Services\FamilyService;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View;
+use Carbon\Carbon;
 
 class FamilyController extends Controller
 {
     protected FamilyService $familyService;
 
-    public function __construct(FamilyService $familyService)
+    protected ContributionService $contributionService;
+
+    public function __construct(FamilyService $familyService, ContributionService $contributionService)
     {
         $this->familyService = $familyService;
+        $this->contributionService = $contributionService;
     }
 
     /**
@@ -23,6 +28,10 @@ class FamilyController extends Controller
     public function index(): View
     {
         $families = $this->familyService->getAll();
+
+        foreach ($families as $family) {
+            $family->total_contribution = $this->familyService->calculateTotalContribution($family->id);
+        }
 
         return view('panel.families.index', compact('families'));
     }
@@ -71,9 +80,25 @@ class FamilyController extends Controller
     {
         $family = $this->familyService->getById($id);
         $family_members = $this->familyService->getFamilyMembers($id);
+        $fiscalYear = session('fiscal_year');
+        $totalContribution = 0;
 
-        return view('panel.families.show', compact(['family', 'family_members']));
+        foreach ($family_members as $member) {
+            $age = (int) Carbon::parse($member->birthdate)->diffInYears(Carbon::parse($fiscalYear->year . '-01-01'));
+
+            $contribution = $this->contributionService->getContributionForMember(
+                $member->member_type_id,
+                $age,
+                $fiscalYear->id
+            );
+
+            $member->contribution = $contribution;
+            $totalContribution += $contribution?->amount ?? 0;
+        }
+
+        return view('panel.families.show', compact(['family', 'family_members', 'totalContribution']));
     }
+
 
     /**
      * @inheritDoc

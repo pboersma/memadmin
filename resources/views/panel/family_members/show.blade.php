@@ -74,7 +74,7 @@
                                 No Contribution set for {{ session('fiscal_year')->year }}.
                             </div>
 
-                            <a href="{{ route('contributions.create', ['birthdate' => $family_member->birthdate, 'member_type_id' => 1]) }}"
+                            <a href="{{ route('contributions.create', ['birthdate' => $family_member->birthdate, 'member_type_id' => $family_member->member_type->id]) }}"
                                 class="btn btn-outline-primary w-100 mt-3 rounded-pill">
                                 <i class="fa-solid fa-plus me-1"></i> Set Contribution
                             </a>

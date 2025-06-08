@@ -85,4 +85,23 @@ class ContributionRepository extends BaseRepository
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+
+    public function findByTypeAndAgeAndYear(int $memberTypeId, int $age, int $fiscalYearId): ?object
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM {$this->table}
+            WHERE member_type_id = :member_type_id
+              AND age = :age
+              AND fiscal_year_id = :fiscal_year_id
+            LIMIT 1
+        ");
+
+        $stmt->bindParam(':member_type_id', $memberTypeId);
+        $stmt->bindParam(':age', $age);
+        $stmt->bindParam(':fiscal_year_id', $fiscalYearId);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_OBJ) ?: null;
+    }
 }

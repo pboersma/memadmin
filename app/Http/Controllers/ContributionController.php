@@ -52,9 +52,8 @@ class ContributionController implements ControllerInterface
         $request = request();
 
         $referenceDate = Carbon::create(session('fiscal_year')->year, 1, 1);
-
         $birthdate = Carbon::parse($request->birthdate);
-        $age = $birthdate->diffInYears($referenceDate);
+        $age = (int) $birthdate->diffInYears($referenceDate);
 
         $discounts = collect($this->discountService->getAll());
         $memberType = $this->memberTypeService->getById($request->member_type_id);

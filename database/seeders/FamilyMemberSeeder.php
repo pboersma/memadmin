@@ -7,30 +7,47 @@ use Illuminate\Support\Facades\DB;
 
 class FamilyMemberSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        DB::table('family_members')->insert([
-            [
-                'name' => 'Peter',
-                'birthdate' => '1990-01-01',
-                'member_type' => 'Father',
-                'member_type_id' => 1,
-                'family_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'Stefan',
-                'birthdate' => '1995-01-01',
-                'member_type' => 'Son',
-                'member_type_id' => 3,
-                'family_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ]);
+        $firstNames = [
+            'Peter', 'Stefan', 'Anna', 'Lisa', 'Tom', 'Eva', 'Noah', 'Sophie',
+            'Lars', 'Julia', 'Milan', 'Emma', 'Daan', 'Tess', 'Bram', 'Sara',
+            'Finn', 'Lotte', 'Lucas', 'Nina', 'Joep', 'Fleur', 'Max', 'Elin',
+            'Jesse', 'Roos', 'Tim', 'Mila', 'Mees', 'Luna', 'Gijs', 'Isa'
+        ];
+
+        $familyRoles = [ // 🧾 Niet gekoppeld aan member_types
+            'Father', 'Mother', 'Son', 'Daughter', 'Grandparent'
+        ];
+
+        $membershipTypes = [
+            1,
+            2,
+            3,
+        ];
+
+        $families = range(1, 10);
+        $members = [];
+        $nameIndex = 0;
+
+        foreach ($families as $familyId) {
+            $memberCount = rand(3, 5);
+
+            for ($i = 0; $i < $memberCount; $i++) {
+                $members[] = [
+                    'name' => $firstNames[$nameIndex % count($firstNames)],
+                    'birthdate' => now()->subYears(rand(1, 80))->format('Y-m-d'),
+                    'member_type' => $familyRoles[array_rand($familyRoles)],
+                    'member_type_id' => $membershipTypes[array_rand($membershipTypes)],
+                    'family_id' => $familyId,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+
+                $nameIndex++;
+            }
+        }
+
+        DB::table('family_members')->insert($members);
     }
 }

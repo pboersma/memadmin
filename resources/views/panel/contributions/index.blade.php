@@ -11,6 +11,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Description</th>
+                <th scope="col">Age</th>
+                <th scope="col">Amount</th>
                 <th scope="col">UpdatedAt</th>
                 <th scope="col">CreatedAt</th>
             </tr>
@@ -20,6 +22,8 @@
                 <tr>
                     <th scope="row">{{ $contribution->id }}</th>
                     <td>{{ $contribution->member_type }}</td>
+                    <td>{{ $contribution->age }}</td>
+                    <td>{{ $contribution->amount }}</td>
                     <td>{{ $contribution->updated_at }}</td>
                     <td>{{ $contribution->created_at }}</td>
                     <td>

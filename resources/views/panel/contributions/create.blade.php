@@ -5,7 +5,7 @@
         <div class="card shadow-sm border-0 rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary">
-                    <i class="fa-solid fa-euro-sign me-2 text-secondary"></i> Nieuwe Contributie aanmaken voor {{ session() }}
+                    <i class="fa-solid fa-euro-sign me-2 text-secondary"></i> Nieuwe Contributie aanmaken voor {{ session('fiscal_year')->year }}
                 </h5>
             </div>
 
@@ -14,6 +14,7 @@
                     @csrf
                     <input type="hidden" name="fiscal_year_id" value="{{ session('fiscal_year')->id }}">
                     <input type="hidden" name="member_type_id" value="{{ $member_type->id }}">
+                    <input type="hidden" name="member_type" value="{{ $current_discount->category }}">
 
                     <div class="mb-3">
                         <label class="form-label">Leeftijd bij aanvang boekjaar</label>

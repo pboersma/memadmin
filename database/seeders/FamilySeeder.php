@@ -43,6 +43,42 @@ class FamilySeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'name' => 'Miller',
+                'address' => '303 Birch St, Springfield',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Wilson',
+                'address' => '404 Cedar St, Springfield',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Moore',
+                'address' => '505 Walnut St, Springfield',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Taylor',
+                'address' => '606 Chestnut St, Springfield',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Anderson',
+                'address' => '707 Poplar St, Springfield',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+                        [
+                'name' => 'Donn',
+                'address' => '7072 Poplar St, Springfield',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]);
     }
 }

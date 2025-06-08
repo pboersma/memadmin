@@ -89,10 +89,9 @@ class FamilyMemberController implements ControllerInterface
     {
         $family_member = $this->familyMemberService->getWithMemberType($id);
 
-        $fiscalYear = session('fiscal_year')->year;
-        $referenceDate = Carbon::create($fiscalYear, 1, 1);
-
-        $age = Carbon::parse($family_member->birthdate)->diffInYears($referenceDate);
+        $referenceDate = Carbon::create(session('fiscal_year')->year, 1, 1);
+        $birthdate = Carbon::parse($family_member->birthdate);
+        $age = (int) $birthdate->diffInYears($referenceDate);
 
         $contribution = $this->contributionService->getContributionByAgeWithDiscount($age);
 
