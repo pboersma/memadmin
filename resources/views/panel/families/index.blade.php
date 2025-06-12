@@ -2,14 +2,12 @@
 
 @section('content')
     <div class="container py-4">
-        {{-- Add Button --}}
         <div class="d-flex justify-content-end mb-3">
             <a href="{{ route('families.create') }}" class="btn btn-primary rounded-pill shadow-sm">
                 <i class="fa-solid fa-plus me-2"></i> Nieuwe Familie
             </a>
         </div>
 
-        {{-- Card --}}
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">

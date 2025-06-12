@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Services\AuthService;
-use App\Repositories\UserRepository;
 
 class AuthController
 {
@@ -17,12 +20,24 @@ class AuthController
         $this->authService = $authService;
     }
 
-    public function showLogin()
+    /**
+     * Display the the login view.
+     *
+     * @return View
+     */
+    public function showLogin(): View
     {
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    /**
+     * Handle a login request using the provided email and password credentials.
+     *
+     * @param Request $request The incoming HTTP request containing login credentials.
+     *
+     * @return RedirectResponse
+     */
+    public function login(LoginRequest $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
 
@@ -35,47 +50,51 @@ class AuthController
         );
 
         if ($success) {
-            return redirect()
-                ->route('families.index')
-                ->withCookie(cookie('last_login', now(), 60 * 24 * 30));
+            return redirect()->route('families.index')->withCookie(cookie('last_login', now(), 60 * 24 * 30));
         }
 
-        return back()
-            ->withErrors(['login' => 'Ongeldige inloggegevens.']);
+        return back()->withErrors(['login' => 'Ongeldige inloggegevens.']);
     }
 
-    public function logout()
+    /**
+     * Log the user out by flushing the session and removing the last login cookie.
+     *
+     * @return RedirectResponse
+     */
+    public function logout(): RedirectResponse
     {
         session()->flush();
 
-        return redirect()
-            ->route('login')
-            ->withCookie(Cookie::forget('last_login'));
+        return redirect()->route('login')->withCookie(Cookie::forget('last_login'));
     }
 
-    public function showRegister()
+    /**
+     * Display the user registration form view.
+     *
+     * @return View
+     */
+    public function showRegister(): View
     {
         return view('auth.register');
     }
 
-    public function register(Request $request)
+    /**
+     * Handle a user registration request.
+     *
+     * @param Request $request The incoming HTTP request with registration data.
+     *
+     * @return RedirectResponse
+     */
+    public function register(RegisterRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|min:2|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-        ]);
-
-        $hashedPassword = Hash::make($validated['password']);
+        $hashedPassword = Hash::make($request['password']);
 
         $this->authService->register(
-            $validated['name'],
-            $validated['email'],
+            $request->input('name'),
+            $request->input('email'),
             $hashedPassword
         );
 
-        return redirect()
-            ->route('login')
-            ->with('success', 'Account aangemaakt!');
+        return redirect()->route('login')->with('success', 'Account aangemaakt!');
     }
 }

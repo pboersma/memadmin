@@ -2,18 +2,16 @@
 
 @section('content')
     <div class="container py-4">
-        {{-- Add Button --}}
         <div class="d-flex justify-content-end mb-3">
             <a href="{{ route('family_members.create') }}" class="btn btn-primary rounded-pill shadow-sm">
                 <i class="fa-solid fa-plus me-2"></i> Nieuw Familielid
             </a>
         </div>
 
-        {{-- Card --}}
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-users me-2 text-secondary"></i> Family Members
+                    <i class="fa-solid fa-users me-2 text-secondary"></i> Familie leden
                 </h5>
             </div>
 
@@ -23,11 +21,11 @@
                         <thead class="table-light text-secondary">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Firstname</th>
-                                <th scope="col">Lastname</th>
-                                <th scope="col">Updated at</th>
-                                <th scope="col">Created at</th>
-                                <th scope="col" class="text-end">Actions</th>
+                                <th scope="col">Voornaam</th>
+                                <th scope="col">Familie</th>
+                                <th scope="col">Laatst bijgewerkt</th>
+                                <th scope="col">Aangemaakt op</th>
+                                <th scope="col" class="text-end">Acties</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,11 +34,9 @@
                                     <td class="text-muted">{{ $family_member->id }}</td>
                                     <td>{{ $family_member->name }}</td>
                                     <td>{{ $family_member->family_name }}</td>
-                                    <td><span
-                                            class="badge bg-light text-dark">{{ $family_member->updated_at }}</span>
+                                    <td><span class="badge bg-light text-dark">{{ $family_member->updated_at }}</span>
                                     </td>
-                                    <td><span
-                                            class="badge bg-light text-dark">{{ $family_member->created_at }}</span>
+                                    <td><span class="badge bg-light text-dark">{{ $family_member->created_at }}</span>
                                     </td>
                                     <td class="text-end">
                                         <form action="{{ route('family_members.destroy', $family_member->id) }}" method="POST"

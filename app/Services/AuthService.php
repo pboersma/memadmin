@@ -3,15 +3,19 @@
 namespace App\Services;
 
 use App\Repositories\UserRepository;
+use App\Services\RoleService;
 use Illuminate\Support\Facades\Session;
 
 class AuthService
 {
     protected UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    protected RoleService $roleService;
+
+    public function __construct(UserRepository $userRepository, RoleService $roleService)
     {
         $this->userRepository = $userRepository;
+        $this->roleService = $roleService;
     }
 
     public function attemptLogin(
@@ -34,6 +38,7 @@ class AuthService
         Session::put('user_id', $user['id']);
         Session::put('email', $user['email']);
         Session::put('name', $user['name']);
+        Session::put('roles', $this->roleService->getRolesForUser($user['id']));
 
         $payload = json_encode(['_token' => csrf_token()]);
         $lastActivity = time();

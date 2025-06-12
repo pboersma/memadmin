@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Carbon\Carbon;
+use App\Http\Requests\ContributionStoreRequest;
+use App\Http\Requests\ContributionUpdateRequest;
 use App\Services\DiscountService;
 use App\Services\FamilyMemberService;
 use App\Services\MemberTypeService;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\View\View;
-use App\Interfaces\ControllerInterface;
 use App\Services\ContributionService;
-use Carbon\Carbon;
 
-class ContributionController implements ControllerInterface
+class ContributionController extends Controller
 {
     protected ContributionService $contributionService;
 
@@ -26,6 +25,18 @@ class ContributionController implements ControllerInterface
         FamilyMemberService $familyMemberService,
         DiscountService $discountService,
     ) {
+        parent::__construct(
+            $contributionService,
+            [
+                'plural' => 'contributions',
+                'singular' => 'contribution'
+            ],
+            [
+                'storeRequest' => ContributionStoreRequest::class,
+                'updateRequest' => ContributionUpdateRequest::class,
+            ]
+        );
+
         $this->contributionService = $contributionService;
         $this->memberTypeService = $memberTypeService;
         $this->familyMemberService = $familyMemberService;
@@ -33,19 +44,9 @@ class ContributionController implements ControllerInterface
     }
 
     /**
-     * @inheritDoc
-     */
-    public function index(): View
-    {
-        $contributions = $this->contributionService->getAll();
-
-        return view('panel.contributions.index', compact('contributions'));
-    }
-
-    /**
      * Show the contribution form with age and matching discount based on birthdate and fiscal year.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
     public function create(): View
     {
@@ -67,55 +68,5 @@ class ContributionController implements ControllerInterface
             'current_discount' => $currentDiscount,
             'member_type' => $memberType,
         ]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $this->contributionService->create($request->all());
-
-        return redirect()->route('contributions.index');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function edit($id): View
-    {
-        $contribution = $this->contributionService->getById($id);
-
-        return view('panel.contributions.edit', compact('contribution'));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function update(Request $request, int $id): RedirectResponse
-    {
-        $this->contributionService->update($id, $request->all());
-
-        return redirect()->route('contributions.index');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function show(int $id): View
-    {
-        $contribution = $this->contributionService->getById($id);
-
-        return view('panel.contributions.show', compact('contribution'));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function destroy(int $id): RedirectResponse
-    {
-        $this->contributionService->delete($id);
-
-        return redirect()->route('contributions.index');
     }
 }

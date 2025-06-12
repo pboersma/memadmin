@@ -6,31 +6,41 @@
 
     <hr class="text-secondary">
 
+    @php
+        $roles = array_map(fn($r) => $r->name, session('roles') ?? []);
+    @endphp
+
     <ul class="nav nav-pills flex-column gap-1 mb-3">
-        <li class="nav-item">
-            <a href="{{ route('families.index') }}"
-                class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('families.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                <i class="fa-solid fa-house me-2"></i> Families
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('family_members.index') }}"
-                class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('family_members.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                <i class="fa-solid fa-people-group me-2"></i> Family Members
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('member_types.index') }}"
-                class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('member_types.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                <i class="fa-solid fa-tags me-2"></i> Member Types
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('contributions.index') }}"
-                class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('contributions.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                <i class="fa-solid fa-euro-sign me-2"></i> Contributions
-            </a>
-        </li>
+        @if(array_intersect(['secretaris', 'beheerder'], $roles))
+            <li class="nav-item">
+                <a href="{{ route('families.index') }}"
+                    class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('families.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
+                    <i class="fa-solid fa-house me-2"></i> Families
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('family_members.index') }}"
+                    class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('family_members.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
+                    <i class="fa-solid fa-people-group me-2"></i> Family Members
+                </a>
+            </li>
+        @endif
+        @if(in_array('beheerder', $roles))
+            <li class="nav-item">
+                <a href="{{ route('member_types.index') }}"
+                    class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('member_types.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
+                    <i class="fa-solid fa-tags me-2"></i> Member Types
+                </a>
+            </li>
+        @endif
+        @if(array_intersect(['penningmeester', 'beheerder'], $roles))
+            <li class="nav-item">
+                <a href="{{ route('contributions.index') }}"
+                    class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('contributions.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
+                    <i class="fa-solid fa-euro-sign me-2"></i> Contributions
+                </a>
+            </li>
+        @endif
     </ul>
 
     <div class="mt-auto">
@@ -53,9 +63,14 @@
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                <img src="https://avatar.iran.liara.run/public/47" alt="" width="32" height="32"
                     class="rounded-circle me-2 shadow-sm">
-                <strong>User</strong>
+                <strong>{{ session('name') }}</strong>
+                @if(session('roles'))
+                    <span class="badge bg-secondary ms-2">
+                        {{ session('roles')[0]->name }}
+                    </span>
+                @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow mt-2">
                 <li>

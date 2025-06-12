@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container py-4">
-        {{-- Card --}}
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
@@ -15,7 +14,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- Naam --}}
                     <div class="col-md-6">
                         <label for="name" class="form-label fw-semibold">Naam</label>
                         <input type="text" id="name" name="name" value="{{ old('name', $family->name) }}"
@@ -25,7 +23,6 @@
                         @enderror
                     </div>
 
-                    {{-- Adres --}}
                     <div class="col-md-6">
                         <label for="address" class="form-label fw-semibold">Adres</label>
                         <input type="text" id="address" name="address" value="{{ old('address', $family->address) }}"
@@ -36,7 +33,6 @@
                         @enderror
                     </div>
 
-                    {{-- Actieknoppen --}}
                     <div class="col-12 d-flex justify-content-end mt-4 gap-2">
                         <a href="{{ route('families.index') }}" class="btn btn-outline-secondary rounded-pill">
                             <i class="fa-solid fa-arrow-left me-1"></i> Terug

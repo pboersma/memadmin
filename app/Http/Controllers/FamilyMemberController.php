@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ContributionService;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\View;
-use App\Interfaces\ControllerInterface;
+use App\Services\ContributionService;
 use App\Services\FamilyMemberService;
 use App\Services\FamilyService;
 use App\Services\MemberTypeService;
+use App\Http\Requests\FamilyMemberStoreRequest;
+use App\Http\Requests\FamilyMemberUpdateRequest;
 use Carbon\Carbon;
 
-class FamilyMemberController implements ControllerInterface
+class FamilyMemberController extends Controller
 {
     protected FamilyMemberService $familyMemberService;
 
@@ -28,20 +27,22 @@ class FamilyMemberController implements ControllerInterface
         MemberTypeService $memberTypeService,
         ContributionService $contributionService,
     ) {
+        parent::__construct(
+            $familyMemberService,
+            [
+                'plural' => 'family_members',
+                'singular' => 'family_member'
+            ],
+            [
+                'storeRequest' => FamilyMemberStoreRequest::class,
+                'updateRequest' => FamilyMemberUpdateRequest::class,
+            ]
+        );
+
         $this->familyMemberService = $familyMemberService;
         $this->familyService = $familyService;
         $this->memberTypeService = $memberTypeService;
         $this->contributionService = $contributionService;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function index(): View
-    {
-        $family_members = $this->familyMemberService->getAll();
-
-        return view('panel.family_members.index', compact('family_members'));
     }
 
     /**
@@ -53,33 +54,6 @@ class FamilyMemberController implements ControllerInterface
         $member_types = $this->memberTypeService->getAll();
 
         return view('panel.family_members.create', compact('families'), compact('member_types'));
-    }
-
-    public function store(Request $request): RedirectResponse
-    {
-        $this->familyMemberService->create($request->all());
-
-        return redirect()->route('family_members.index');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function edit($id): View
-    {
-        $family_member = $this->familyMemberService->getById($id);
-
-        return view('panel.family_members.edit', compact('family_member'));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function update(Request $request, int $id): RedirectResponse
-    {
-        $this->familyMemberService->update($id, $request->all());
-
-        return redirect()->route('family_members.index');
     }
 
     /**
@@ -102,15 +76,5 @@ class FamilyMemberController implements ControllerInterface
                 'contribution'
             )
         );
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function destroy(int $id): RedirectResponse
-    {
-        $this->familyMemberService->delete($id);
-
-        return redirect()->route('family_members.index');
     }
 }
