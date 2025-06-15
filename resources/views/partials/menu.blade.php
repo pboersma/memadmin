@@ -24,8 +24,6 @@
                     <i class="fa-solid fa-people-group me-2"></i> Family Members
                 </a>
             </li>
-        @endif
-        @if(in_array('beheerder', $roles))
             <li class="nav-item">
                 <a href="{{ route('member_types.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('member_types.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
@@ -38,6 +36,12 @@
                 <a href="{{ route('contributions.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('contributions.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
                     <i class="fa-solid fa-euro-sign me-2"></i> Contributions
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('discounts.index') }}"
+                    class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('discounts.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
+                    <i class="fa-solid fa-percent me-2"></i> Discounts
                 </a>
             </li>
         @endif

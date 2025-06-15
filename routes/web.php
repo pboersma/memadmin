@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\FamilyMemberController;
 use App\Http\Controllers\MemberTypeController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\ContributionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FiscalYearController;
 use App\Http\Middleware\AuthenticatedMiddleware;
+use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -14,10 +16,18 @@ Route::middleware([
 ])
     ->prefix('admin')
     ->group(function () {
-        Route::resource('families', FamilyController::class);
-        Route::resource('family_members', FamilyMemberController::class);
-        Route::resource('member_types', MemberTypeController::class);
-        Route::resource('contributions', ContributionController::class);
+        Route::middleware(RoleMiddleware::class . ':secretaris,beheerder')
+            ->group(function () {
+                Route::resource('families', FamilyController::class);
+                Route::resource('family_members', FamilyMemberController::class);
+                Route::resource('member_types', MemberTypeController::class);
+            });
+
+        Route::middleware(RoleMiddleware::class . ':penningmeester,beheerder')
+            ->group(function () {
+                Route::resource('contributions', ContributionController::class);
+                Route::resource('discounts', DiscountController::class);
+            });
 
         Route::post('fiscal-year', [FiscalYearController::class, 'set'])
             ->name('fiscal-year.set');

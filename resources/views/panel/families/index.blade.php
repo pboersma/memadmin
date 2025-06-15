@@ -32,13 +32,27 @@
                         <tbody>
                             @forelse ($families as $family)
                                 <tr>
-                                    <td class="text-muted">{{ $family->id }}</td>
-                                    <td>{{ $family->name }}</td>
-                                    <td>{{ $family->address }}</td>
-                                    <td>€ {{ number_format($family->total_contribution ?? 0, 2, ',', '.') }}</td>
-                                    <td><span class="badge bg-light text-dark">{{ $family->updated_at }}</span>
+                                    <td class="text-muted">
+                                        {{ $family->id }}
                                     </td>
-                                    <td><span class="badge bg-light text-dark">{{ $family->created_at }}</span>
+                                    <td>
+                                        {{ $family->name }}
+                                    </td>
+                                    <td>
+                                        {{ $family->address }}
+                                    </td>
+                                    <td>
+                                        € {{ number_format($family->total_contribution ?? 0, 2, ',', '.') }}
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark">
+                                            {{ $family->updated_at }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark">
+                                            {{ $family->created_at }}
+                                        </span>
                                     </td>
                                     <td class="text-end">
                                         <form action="{{ route('families.destroy', $family->id) }}" method="POST"
