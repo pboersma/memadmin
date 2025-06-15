@@ -38,9 +38,6 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * @inheritDoc
-     */
-    /**
      * Get a single record by a given column and value.
      *
      * @param mixed $value   The value to search for.

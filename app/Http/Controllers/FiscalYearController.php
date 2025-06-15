@@ -15,6 +15,13 @@ class FiscalYearController
         $this->fiscalYearService = $fiscalYearService;
     }
 
+    /**
+     * Sets the fiscal year in the session if it exists in the database.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
     public function set(Request $request): RedirectResponse
     {
         $year = (int) $request->input('fiscal_year');

@@ -15,11 +15,25 @@ class FamilyService extends BaseService
         $this->contributionService = $contributionService;
     }
 
-    public function getFamilyMembers($familyId)
+    /**
+     * Get all members of a given family by ID.
+     *
+     * @param int $familyId
+     *
+     * @return array
+     */
+    public function getFamilyMembers(int $familyId): ?object
     {
         return $this->repository->getFamilyMembers($familyId);
     }
 
+    /**
+     * Calculate the total contribution amount for a given family.
+     *
+     * @param int $familyId
+     *
+     * @return float
+     */
     public function calculateTotalContribution(int $familyId): float
     {
         $members = $this->getFamilyMembers($familyId);

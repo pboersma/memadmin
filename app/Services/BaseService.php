@@ -25,7 +25,7 @@ abstract class BaseService implements ServiceInterface
     /**
      * @inheritDoc
      */
-    public function getById(int $id): object
+    public function getById(int $id): ?object
     {
         return $this->repository->get($id);
     }

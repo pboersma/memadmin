@@ -27,6 +27,9 @@ class MemberTypeStoreRequest extends FormRequest
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function messages(): array
     {
         return [

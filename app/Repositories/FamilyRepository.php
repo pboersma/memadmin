@@ -8,6 +8,9 @@ class FamilyRepository extends BaseRepository
 {
     protected string $table = 'families';
 
+    /**
+     * @inheritDoc
+     */
     public function create(array $payload): void
     {
         $query = "INSERT INTO $this->table (name, address, created_at, updated_at) VALUES (:name, :address, NOW(), NOW())";
@@ -18,6 +21,9 @@ class FamilyRepository extends BaseRepository
         $stmt->execute();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function update(int $id, array $payload): void
     {
         $stmt = $this->pdo->prepare("UPDATE $this->table SET name = :name, updated_at = NOW() WHERE id = :id");
@@ -27,6 +33,14 @@ class FamilyRepository extends BaseRepository
         $stmt->execute();
     }
 
+
+    /**
+     * Get all members of a given family with their member type description.
+     *
+     * @param int $familyId
+     *
+     * @return array List of family member objects.
+     */
     public function getFamilyMembers(int $familyId): array
     {
         $stmt = $this->pdo->prepare("SELECT

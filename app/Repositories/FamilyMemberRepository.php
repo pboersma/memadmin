@@ -38,6 +38,11 @@ class FamilyMemberRepository extends BaseRepository
         $stmt->execute();
     }
 
+    /**
+     * Get all family members with their associated family data.
+     *
+     * @return array List of family member objects with family info.
+     */
     public function getAll(): array
     {
         $query = "SELECT fm.*, f.name AS family_name

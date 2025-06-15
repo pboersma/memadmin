@@ -37,6 +37,15 @@ class ContributionService extends BaseService
         return $contribution;
     }
 
+    /**
+     * Get the contribution record for a member based on type, age, and fiscal year.
+     *
+     * @param int $memberTypeId
+     * @param int $age
+     * @param int $fiscalYearId
+     *
+     * @return object|null
+     */
     public function getContributionForMember(int $memberTypeId, int $age, int $fiscalYearId): ?object
     {
         return $this->repository->findByTypeAndAgeAndYear($memberTypeId, $age, $fiscalYearId);

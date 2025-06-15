@@ -18,7 +18,7 @@ class FiscalYearService extends BaseService
      *
      * @return object
      */
-    public function getByYear(int $year): object
+    public function getByYear(int $year): ?object
     {
         return $this->repository->getByYear($year);
     }

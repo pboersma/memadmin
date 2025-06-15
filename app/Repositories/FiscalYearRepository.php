@@ -34,6 +34,13 @@ class FiscalYearRepository extends BaseRepository
         $stmt->execute();
     }
 
+    /**
+     * Get a fiscal year record by year.
+     *
+     * @param int $year
+     *
+     * @return object|null
+     */
     public function getByYear(int $year): object
     {
         $query = "SELECT * FROM {$this->table} WHERE year = :year LIMIT 1";

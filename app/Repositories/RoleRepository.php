@@ -8,6 +8,9 @@ class RoleRepository extends BaseRepository
 {
     protected string $table = 'roles';
 
+    /**
+     * @inheritDoc
+     */
     public function create(array $payload): void
     {
         $query = "INSERT INTO {$this->table} (name, description, created_at, updated_at) VALUES (:name, :description, NOW(), NOW())";
@@ -17,6 +20,9 @@ class RoleRepository extends BaseRepository
         $stmt->execute();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function update(int $id, array $payload): void
     {
         $stmt = $this->pdo->prepare("UPDATE {$this->table} SET name = :name, description = :description, updated_at = NOW() WHERE id = :id");
@@ -26,6 +32,13 @@ class RoleRepository extends BaseRepository
         $stmt->execute();
     }
 
+    /**
+     * Get all roles assigned to a user by user ID.
+     *
+     * @param int $userId
+     *
+     * @return array List of role objects.
+     */
     public function getRolesByUserId(int $userId): array
     {
         $stmt = $this->pdo->prepare(
@@ -37,4 +50,3 @@ class RoleRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 }
-

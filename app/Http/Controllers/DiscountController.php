@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DiscountStoreRequest;
+use App\Http\Requests\DiscountUpdateRequest;
 use App\Services\DiscountService;
 
 class DiscountController extends Controller

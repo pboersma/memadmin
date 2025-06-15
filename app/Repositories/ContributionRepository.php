@@ -86,6 +86,15 @@ class ContributionRepository extends BaseRepository
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    /**
+     * Find a contribution by member type, age, and fiscal year.
+     *
+     * @param int $memberTypeId
+     * @param int $age
+     * @param int $fiscalYearId
+     *
+     * @return object|null
+     */
     public function findByTypeAndAgeAndYear(int $memberTypeId, int $age, int $fiscalYearId): ?object
     {
         $stmt = $this->pdo->prepare("

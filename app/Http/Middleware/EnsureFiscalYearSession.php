@@ -9,6 +9,12 @@ use App\Services\FiscalYearService;
 
 class EnsureFiscalYearSession
 {
+    /**
+     * Ensure that the Fiscal Year is set in session.
+     *
+     * @param Request $request
+     * @param Closure $next
+     */
     public function handle(Request $request, Closure $next)
     {
         if (!Session::has('fiscal_year')) {

@@ -30,9 +30,7 @@ class RegisterRequest extends FormRequest
     }
 
     /**
-     * Sets the validation messages.
-     *
-     * @return array{email.email: string, email.required: string, email.unique: string, name.required: string, password.confirmed: string, password.min: string, password.required: string}
+     * @inheritDoc
      */
     public function messages(): array
     {

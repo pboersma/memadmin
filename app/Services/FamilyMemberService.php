@@ -17,6 +17,13 @@ class FamilyMemberService extends BaseService
         $this->memberTypeRepository = $memberTypeRepository;
     }
 
+    /**
+     * Get a family member by ID with its associated member type.
+     *
+     * @param int $id
+
+     * @return object|null
+     */
     public function getWithMemberType(int $id): ?object
     {
         $member = $this->repository->get($id);

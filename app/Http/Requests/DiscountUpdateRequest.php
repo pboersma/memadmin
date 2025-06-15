@@ -15,7 +15,6 @@ class DiscountUpdateRequest extends FormRequest
         return true;
     }
 
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,15 +23,23 @@ class DiscountUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'required|string|min:2',
+            'category' => 'required|string|min:2',
+            'min_age' => 'required|int',
+            'max_age' => 'required|int',
+            'discount' => 'required|int',
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function messages(): array
     {
         return [
-            'description.required' => 'Beschrijving is verplicht.',
-            'description.min' => 'Beschrijving moet minstens 2 karakters lang zijn.',
+            'category.required' => 'Categorie is verplicht.',
+            'min_age.required' => 'Minimum leeftijd is verplicht.',
+            'max_age.required' => 'Maximum leeftijd is verplicht.',
+            'discount.required' => 'Korting is verplicht.',
         ];
     }
 }

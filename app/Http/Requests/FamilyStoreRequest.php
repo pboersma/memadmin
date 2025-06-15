@@ -28,6 +28,9 @@ class FamilyStoreRequest extends FormRequest
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function messages(): array
     {
         return [

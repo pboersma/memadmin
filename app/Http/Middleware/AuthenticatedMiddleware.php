@@ -9,8 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthenticatedMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Validate if current user session is authenticated.
      *
+     * @param  Request $request
      * @param  Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next): Response

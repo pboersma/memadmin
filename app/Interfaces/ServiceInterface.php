@@ -18,7 +18,7 @@ interface ServiceInterface
      *
      * @return object
      */
-    public function getById(int $id): object;
+    public function getById(int $id): ?object;
 
     /**
      * Create a new entity with the given data.

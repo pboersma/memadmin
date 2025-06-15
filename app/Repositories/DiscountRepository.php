@@ -41,6 +41,13 @@ class DiscountRepository extends BaseRepository
     }
 
 
+    /**
+     * Get a discount rule that applies to the given age.
+     *
+     * @param int $age
+     *
+     * @return object|null
+     */
     public function getByAge($age)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM $this->table WHERE min_age <= :age AND max_age >= :age LIMIT 1");

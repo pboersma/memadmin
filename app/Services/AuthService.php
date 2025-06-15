@@ -18,6 +18,17 @@ class AuthService
         $this->roleService = $roleService;
     }
 
+    /**
+     * Attempt to log in a user with the given credentials and store session data.
+     *
+     * @param string $email
+     * @param string $password
+     * @param string $sessionId
+     * @param string $ip
+     * @param string $userAgent
+     *
+     * @return bool True if login is successful, false otherwise.
+     */
     public function attemptLogin(
         string $email,
         string $password,
@@ -55,6 +66,15 @@ class AuthService
         return true;
     }
 
+    /**
+     * Register a new user with the given name, email, and password.
+     *
+     * @param string $name
+     * @param string $email
+     * @param string $password
+     *
+     * @return void
+     */
     public function register(string $name, string $email, string $password): void
     {
         $this->userRepository->create([$name, $email, $password]);
