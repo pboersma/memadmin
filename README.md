@@ -53,6 +53,34 @@ This project uses industry-standard design patterns to improve the **scalability
 - Decouples business logic from database access.  
 - Allows switching between **Eloquent, raw SQL, or PDO** without modifying core logic.
 
+### **Behavioral Patterns**
+
+#### **Template Method**
+**Used in:** Base Controller
+
+**Purpose:**
+- Defines common CRUD workflow in an abstract controller.
+- Child controllers override or extend only specific parts.
+
+#### **Chain of Responsibility**
+**Used in:** Middleware
+
+**Purpose:**
+- Processes HTTP requests through a sequence of middleware handlers.
+- Each handler decides whether to pass the request to the next one.
+
+#### **Factory Pattern**
+**Used in:** Model Factories
+
+**Purpose:**
+- Generates test data for models with consistent defaults.
+
+#### **View Composer**
+**Used in:** ViewServiceProvider
+
+**Purpose:**
+- Injects common data into views when they are rendered.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
