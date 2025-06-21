@@ -77,4 +77,23 @@ class FamilyMemberController extends Controller
             )
         );
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function edit(int $id): View
+    {
+        $family_member = $this->familyMemberService->getWithMemberType($id);
+        $member_types = $this->memberTypeService->getAll();
+        $families = $this->familyService->getAll();
+
+        return view(
+            'panel.family_members.edit',
+            compact(
+                'family_member',
+                'member_types',
+                'families'
+            )
+        );
+    }
 }

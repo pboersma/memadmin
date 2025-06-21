@@ -31,8 +31,23 @@ class FamilyMemberRepository extends BaseRepository
      */
     public function update(int $id, array $payload): void
     {
-        $stmt = $this->pdo->prepare("UPDATE $this->table SET name = :name, updated_at = NOW() WHERE id = :id");
+        $stmt = $this->pdo->prepare("
+            UPDATE $this->table
+            SET
+                name = :name,
+                birthdate = :birthdate,
+                member_type = :member_type,
+                member_type_id = :member_type_id,
+                family_id = :family_id,
+                updated_at = NOW()
+            WHERE id = :id
+        ");
+
         $stmt->bindParam(':name', $payload['name']);
+        $stmt->bindParam(':birthdate', $payload['birthdate']);
+        $stmt->bindParam(':member_type', $payload['member_type']);
+        $stmt->bindParam(':member_type_id', $payload['member_type_id']);
+        $stmt->bindParam(':family_id', $payload['family_id']);
         $stmt->bindParam(':id', $id);
 
         $stmt->execute();

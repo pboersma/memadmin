@@ -11,17 +11,19 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-tags me-2 text-secondary"></i> Discounts
+                    <i class="fa-solid fa-percent me-2 text-secondary"></i> Contributie Staffels
                 </h5>
             </div>
 
-            <div class="card-body px-4">
+            <div class="card-body px-4 py-4">
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table align-middle border border-1">
                         <thead class="table-light text-secondary">
                             <tr>
                                 <th>#</th>
                                 <th>Omschrijving</th>
+                                <th>Leeftijd</th>
+                                <th>Korting (%)</th>
                                 <th>Bijgewerkt op</th>
                                 <th>Aangemaakt op</th>
                                 <th class="text-end">Acties</th>
@@ -31,12 +33,26 @@
                             @forelse ($discounts as $discount)
                                 <tr>
                                     <td class="text-muted">{{ $discount->id }}</td>
-                                    <td>{{ $discount->category }}</td>
-                                    <td><span
-                                            class="badge bg-light text-dark">{{ $discount->updated_at }}</span>
+                                    <td class="fw-semibold">{{ $discount->category }}</td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">
+                                            {{ $discount->min_age }} – {{ $discount->max_age }} jaar
+                                        </span>
                                     </td>
-                                    <td><span
-                                            class="badge bg-light text-dark">{{ $discount->created_at }}</span>
+                                    <td>
+                                        <span class="badge bg-success-subtle text-success border">
+                                            {{ $discount->discount }}%
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted small">
+                                            {{ $discount->updated_at }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted small">
+                                            {{ $discount->created_at }}
+                                        </span>
                                     </td>
                                     <td class="text-end">
                                         <form action="{{ route('discounts.destroy', $discount->id) }}" method="POST"
@@ -60,7 +76,10 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center text-muted py-4">Geen soorten leden gevonden.</td>
+                                    <td colspan="7" class="text-center text-muted py-4">
+                                        <i class="fa-regular fa-face-frown fa-lg mb-2"></i><br>
+                                        Geen soorten leden gevonden.
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>

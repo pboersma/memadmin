@@ -27,7 +27,7 @@ class ContributionStoreRequest extends FormRequest
             'member_type' => 'required|string',
             'member_type_id' => 'required|int',
             'fiscal_year_id' => 'required|int',
-            'amount' => 'required|int|min:1',
+            'amount' => 'required|decimal:0,2|min:0.01',
         ];
     }
 
@@ -43,7 +43,7 @@ class ContributionStoreRequest extends FormRequest
             'fiscal_year_id.required' => 'Jaar is verplicht.',
             'amount.required' => 'Bedrag is verplicht.',
             'age.min' => 'Leeftijd moet minstens 1 zijn.',
-            'amount.min' => 'Bedrag moet minstens 1 zijn.',
+            'amount.min' => 'Bedrag moet minstens 0.01 zijn.',
         ];
     }
 }

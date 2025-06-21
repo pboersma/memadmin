@@ -11,32 +11,38 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-users me-2 text-secondary"></i> Familie leden
+                    <i class="fa-solid fa-users me-2 text-secondary"></i> Familieleden
                 </h5>
             </div>
 
-            <div class="card-body px-4">
+            <div class="card-body px-4 py-4">
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table align-middle border border-1">
                         <thead class="table-light text-secondary">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Voornaam</th>
-                                <th scope="col">Familie</th>
-                                <th scope="col">Laatst bijgewerkt</th>
-                                <th scope="col">Aangemaakt op</th>
-                                <th scope="col" class="text-end">Acties</th>
+                                <th>#</th>
+                                <th>Naam</th>
+                                <th>Familie</th>
+                                <th>Bijgewerkt op</th>
+                                <th>Aangemaakt op</th>
+                                <th class="text-end">Acties</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($family_members as $family_member)
                                 <tr>
                                     <td class="text-muted">{{ $family_member->id }}</td>
-                                    <td>{{ $family_member->name }}</td>
+                                    <td class="fw-semibold">{{ $family_member->name }}</td>
                                     <td>{{ $family_member->family_name }}</td>
-                                    <td><span class="badge bg-light text-dark">{{ $family_member->updated_at }}</span>
+                                    <td>
+                                        <span class="text-muted small">
+                                            {{ $family_member->updated_at }}
+                                        </span>
                                     </td>
-                                    <td><span class="badge bg-light text-dark">{{ $family_member->created_at }}</span>
+                                    <td>
+                                        <span class="text-muted small">
+                                            {{ $family_member->created_at }}
+                                        </span>
                                     </td>
                                     <td class="text-end">
                                         <form action="{{ route('family_members.destroy', $family_member->id) }}" method="POST"
@@ -60,7 +66,10 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center text-muted py-4">Geen familieleden gevonden.</td>
+                                    <td colspan="6" class="text-center text-muted py-4">
+                                        <i class="fa-regular fa-face-frown fa-lg mb-2"></i><br>
+                                        Geen familieleden gevonden.
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>

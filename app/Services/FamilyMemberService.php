@@ -33,7 +33,7 @@ class FamilyMemberService extends BaseService
         }
 
         $memberType = $this->memberTypeRepository->get($member->member_type_id);
-        $member->member_type = $memberType;
+        $member->mem_type = $memberType;
 
         return $member;
     }

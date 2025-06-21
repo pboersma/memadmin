@@ -21,13 +21,13 @@
             <li class="nav-item">
                 <a href="{{ route('family_members.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('family_members.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                    <i class="fa-solid fa-people-group me-2"></i> Family Members
+                    <i class="fa-solid fa-users me-2"></i> Familieleden
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('member_types.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('member_types.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                    <i class="fa-solid fa-tags me-2"></i> Member Types
+                    <i class="fa-solid fa-tags me-2"></i> Soorten Leden
                 </a>
             </li>
         @endif
@@ -35,13 +35,13 @@
             <li class="nav-item">
                 <a href="{{ route('contributions.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('contributions.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                    <i class="fa-solid fa-euro-sign me-2"></i> Contributions
+                    <i class="fa-solid fa-hand-holding-dollar me-2"></i> Contributies
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('discounts.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('discounts.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
-                    <i class="fa-solid fa-percent me-2"></i> Discounts
+                    <i class="fa-solid fa-percent me-2"></i> Contributies Staffels
                 </a>
             </li>
         @endif

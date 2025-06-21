@@ -24,7 +24,7 @@ class FamilyStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:2',
-            'address' => 'required|string|min:4',
+            'address' => 'required|string|min:4|unique:families,address',
         ];
     }
 
@@ -38,6 +38,7 @@ class FamilyStoreRequest extends FormRequest
             'address.required' => 'Adres is verplicht.',
             'name.min' => 'Naam moet minstens 2 karakters lang zijn.',
             'address.min' => 'Adres moet minstens 4 karakters lang zijn.',
+            'address.unique' => 'Dit adres is al in gebruik.',
         ];
     }
 }

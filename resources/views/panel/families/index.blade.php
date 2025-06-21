@@ -11,46 +11,42 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-house-chimney-user me-2 text-secondary"></i> Families
+                    <i class="fa-solid fa-house me-2 text-secondary"></i> Families
                 </h5>
             </div>
 
-            <div class="card-body px-4">
+            <div class="card-body px-4 py-4">
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table align-middle border border-1">
                         <thead class="table-light text-secondary">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Naam</th>
-                                <th scope="col">Adres</th>
-                                <th scope="col">Contributie</th>
-                                <th scope="col">Laatst bijgewerkt</th>
-                                <th scope="col">Aangemaakt op</th>
-                                <th scope="col" class="text-end">Acties</th>
+                                <th>#</th>
+                                <th>Naam</th>
+                                <th>Adres</th>
+                                <th>Contributie</th>
+                                <th>Bijgewerkt op</th>
+                                <th>Aangemaakt op</th>
+                                <th class="text-end">Acties</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($families as $family)
                                 <tr>
-                                    <td class="text-muted">
-                                        {{ $family->id }}
+                                    <td class="text-muted">{{ $family->id }}</td>
+                                    <td class="fw-semibold">{{ $family->name }}</td>
+                                    <td>{{ $family->address }}</td>
+                                    <td>
+                                        <span class="badge bg-success-subtle text-success border">
+                                            € {{ number_format($family->total_contribution ?? 0, 2, ',', '.') }}
+                                        </span>
                                     </td>
                                     <td>
-                                        {{ $family->name }}
-                                    </td>
-                                    <td>
-                                        {{ $family->address }}
-                                    </td>
-                                    <td>
-                                        € {{ number_format($family->total_contribution ?? 0, 2, ',', '.') }}
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-light text-dark">
+                                        <span class="text-muted small">
                                             {{ $family->updated_at }}
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-light text-dark">
+                                        <span class="text-muted small">
                                             {{ $family->created_at }}
                                         </span>
                                     </td>
@@ -76,7 +72,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center text-muted py-4">
+                                    <td colspan="7" class="text-center text-muted py-4">
+                                        <i class="fa-regular fa-face-frown fa-lg mb-2"></i><br>
                                         Geen families gevonden.
                                     </td>
                                 </tr>

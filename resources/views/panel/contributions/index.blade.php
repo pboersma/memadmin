@@ -15,32 +15,42 @@
                 </h5>
             </div>
 
-            <div class="card-body px-4">
+            <div class="card-body px-4 py-4">
                 <div class="table-responsive">
-                    <table class="table align-middle">
+                    <table class="table align-middle border border-1">
                         <thead class="table-light text-secondary">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Beschrijving</th>
-                                <th scope="col">Leeftijd</th>
-                                <th scope="col">Bedrag</th>
-                                <th scope="col">Laatst bijgewerkt</th>
-                                <th scope="col">Aangemaakt op</th>
-                                <th scope="col" class="text-end">Acties</th>
+                                <th>#</th>
+                                <th>Lidtype</th>
+                                <th>Leeftijd</th>
+                                <th>Bedrag (€)</th>
+                                <th>Bijgewerkt op</th>
+                                <th>Aangemaakt op</th>
+                                <th class="text-end">Acties</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($contributions as $contribution)
                                 <tr>
                                     <td class="text-muted">{{ $contribution->id }}</td>
-                                    <td>{{ $contribution->member_type }}</td>
-                                    <td>{{ $contribution->age }}</td>
-                                    <td>&euro; {{ number_format($contribution->amount, 2, ',', '.') }}</td>
+                                    <td class="fw-semibold">{{ $contribution->member_type }}</td>
                                     <td>
-                                        <span class="badge bg-light text-dark">{{ $contribution->updated_at }}</span>
+                                        <span class="badge bg-light text-dark border">{{ $contribution->age }} jaar</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-light text-dark">{{ $contribution->created_at }}</span>
+                                        <span class="badge bg-success-subtle text-success border">
+                                            € {{ number_format($contribution->amount, 2, ',', '.') }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted small">
+                                            {{ $contribution->updated_at }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted small">
+                                            {{ $contribution->created_at }}
+                                        </span>
                                     </td>
                                     <td class="text-end">
                                         <form action="{{ route('contributions.destroy', $contribution->id) }}" method="POST"
@@ -64,7 +74,10 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center text-muted py-4">Geen contributies gevonden.</td>
+                                    <td colspan="7" class="text-center text-muted py-4">
+                                        <i class="fa-regular fa-face-frown fa-lg mb-2"></i><br>
+                                        Geen contributies gevonden.
+                                    </td>
                                 </tr>
                             @endforelse
                         </tbody>

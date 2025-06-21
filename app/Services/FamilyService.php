@@ -22,7 +22,7 @@ class FamilyService extends BaseService
      *
      * @return array
      */
-    public function getFamilyMembers(int $familyId): ?object
+    public function getFamilyMembers(int $familyId): array
     {
         return $this->repository->getFamilyMembers($familyId);
     }

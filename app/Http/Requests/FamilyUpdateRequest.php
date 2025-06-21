@@ -24,7 +24,7 @@ class FamilyUpdateRequest extends FormRequest
     {
         return [
             'name' => 'string|min:2',
-            'address' => 'string|min:4',
+            'address' => 'string|min:4|unique:families,address,' . $this->route('family'),
         ];
     }
 
@@ -38,6 +38,7 @@ class FamilyUpdateRequest extends FormRequest
             'address.required' => 'Adres is verplicht.',
             'name.min' => 'Naam moet minstens 2 karakters lang zijn.',
             'address.min' => 'Adres moet minstens 4 karakters lang zijn.',
+            'address.unique' => 'Dit adres is al in gebruik.',
         ];
     }
 }
