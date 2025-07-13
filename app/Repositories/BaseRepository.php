@@ -38,6 +38,24 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * Get all records where a specific column matches a given value.
+     *
+     * @param string $column The column to filter by.
+     * @param mixed $value The value to match.
+     *
+     * @return array An array of matching records as objects.
+     */
+    public function getAllWhere(string $column, mixed $value): array
+    {
+        $query = "SELECT * FROM {$this->table} WHERE {$column} = :value";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':value', $value);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
      * Get a single record by a given column and value.
      *
      * @param mixed $value The value to search for.

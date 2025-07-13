@@ -30,7 +30,7 @@
     </style>
 
     <div class="w-100 d-flex align-items-center py-4 bg-body-tertiary">
-        <main class="form-signin w-100 m-auto">
+        <main class="container m-auto">
             <h1 class="h3 mb-3"><strong>Mem</strong>Admin</h1>
             @yield('content')
         </main>

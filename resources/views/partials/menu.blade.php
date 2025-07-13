@@ -70,6 +70,7 @@
                 <img src="https://avatar.iran.liara.run/public/47" alt="" width="32" height="32"
                     class="rounded-circle me-2 shadow-sm">
                 <strong>{{ session('name') }}</strong>
+                <br>
                 @if(session('roles'))
                     <span class="badge bg-secondary ms-2">
                         {{ session('roles')[0]->name }}

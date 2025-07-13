@@ -3,8 +3,6 @@
 @section('content')
     <form action="{{ route('register') }}" method="post">
         @csrf
-        <h2 class="h3 mb-3 fw-normal">Please register</h2>
-
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingName" name="name" placeholder="John Doe" required>
             <label for="floatingName">Name</label>

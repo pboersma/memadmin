@@ -50,4 +50,10 @@ class ContributionService extends BaseService
     {
         return $this->repository->findByTypeAndAgeAndYear($memberTypeId, $age, $fiscalYearId);
     }
+
+    public function getAll(): array
+    {
+        $fiscalYear = session('fiscal_year');
+        return $this->repository->getAllWhere('fiscal_year_id', $fiscalYear->id);
+    }
 }
