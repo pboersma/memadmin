@@ -5,7 +5,7 @@
         <div class="card shadow-sm border-0 rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary">
-                    <i class="fa-solid fa-tag me-2 text-secondary"></i> Soort Lid: {{ $member_type->description }}
+                    Soort Lid: {{ $member_type->description }}
                 </h5>
             </div>
 

@@ -5,7 +5,7 @@
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary">
-                    <i class="fa-solid fa-house me-2 text-secondary"></i> Familie - {{ $family->name }}
+                    Familie - {{ $family->name }}
                 </h5>
             </div>
 

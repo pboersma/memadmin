@@ -11,7 +11,7 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-users me-2 text-secondary"></i> Familieleden
+                    Familieleden
                 </h5>
             </div>
 
@@ -23,6 +23,7 @@
                                 <th>#</th>
                                 <th>Naam</th>
                                 <th>Familie</th>
+                                <th>Relatie tot Familie</th>
                                 <th>Bijgewerkt op</th>
                                 <th>Aangemaakt op</th>
                                 <th class="text-end">Acties</th>
@@ -34,6 +35,7 @@
                                     <td class="text-muted">{{ $family_member->id }}</td>
                                     <td class="fw-semibold">{{ $family_member->name }}</td>
                                     <td>{{ $family_member->family_name }}</td>
+                                    <td>{{ $family_member->member_type }}</td>
                                     <td>
                                         <span class="text-muted small">
                                             {{ $family_member->updated_at }}

@@ -5,7 +5,7 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-plus me-2 text-success"></i> Nieuwe Familie Aanmaken
+                    Familie Aanmaken
                 </h5>
             </div>
 

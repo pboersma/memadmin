@@ -16,8 +16,8 @@ class FamilyMemberSeeder extends Seeder
             'Jesse', 'Roos', 'Tim', 'Mila', 'Mees', 'Luna', 'Gijs', 'Isa'
         ];
 
-        $familyRoles = [ // 🧾 Niet gekoppeld aan member_types
-            'Father', 'Mother', 'Son', 'Daughter', 'Grandparent'
+        $familyRoles = [
+            'Son', 'Daughter', 'Parent', 'Other'
         ];
 
         $membershipTypes = [

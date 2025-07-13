@@ -4,14 +4,14 @@
     <div class="container py-4">
         <div class="d-flex justify-content-end mb-3">
             <a href="{{ route('discounts.create') }}" class="btn btn-primary rounded-pill">
-                <i class="fa-solid fa-plus me-2"></i> Nieuw Soort Lid
+                <i class="fa-solid fa-plus me-2"></i> Nieuw Contributie Staffel
             </a>
         </div>
 
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-percent me-2 text-secondary"></i> Contributie Staffels
+                    Contributie Staffels
                 </h5>
             </div>
 

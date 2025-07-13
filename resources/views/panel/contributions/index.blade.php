@@ -2,16 +2,10 @@
 
 @section('content')
     <div class="container py-4">
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{{ route('contributions.create') }}" class="btn btn-primary rounded-pill shadow-sm">
-                <i class="fa-solid fa-plus me-2"></i> Nieuwe Contributie
-            </a>
-        </div>
-
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-hand-holding-dollar me-2 text-secondary"></i> Contributies
+                    Contributies
                 </h5>
             </div>
 

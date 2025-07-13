@@ -40,7 +40,7 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Get a single record by a given column and value.
      *
-     * @param mixed $value   The value to search for.
+     * @param mixed $value The value to search for.
      * @param string $column The column to search in (default: 'id').
      *
      * @return object|null   The fetched record or null if not found.

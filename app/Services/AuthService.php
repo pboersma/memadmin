@@ -42,10 +42,8 @@ class AuthService
             return false;
         }
 
-        // Regenerate session to prevent fixation
         Session::regenerate();
 
-        // Set session variables
         Session::put('user_id', $user['id']);
         Session::put('email', $user['email']);
         Session::put('name', $user['name']);

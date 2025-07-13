@@ -11,7 +11,7 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary fw-semibold">
-                    <i class="fa-solid fa-tags me-2 text-secondary"></i> Soorten Leden
+                    Soorten Leden
                 </h5>
             </div>
 
