@@ -16,10 +16,16 @@ Route::middleware([
 ])
     ->prefix('admin')
     ->group(function () {
+        Route::middleware(RoleMiddleware::class . ':secretaris,penningmeester,beheerder')
+            ->group(function () {
+                Route::resource('families', FamilyController::class)->only(['index', 'show']);
+                Route::resource('family_members', FamilyMemberController::class)->only(['index', 'show']);
+            });
+
         Route::middleware(RoleMiddleware::class . ':secretaris,beheerder')
             ->group(function () {
-                Route::resource('families', FamilyController::class);
-                Route::resource('family_members', FamilyMemberController::class);
+                Route::resource('families', FamilyController::class)->except(['index', 'show']);
+                Route::resource('family_members', FamilyMemberController::class)->except(['index', 'show']);
                 Route::resource('member_types', MemberTypeController::class);
             });
 
@@ -36,8 +42,14 @@ Route::middleware([
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('showLogin');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/register', [AuthController::class, 'showRegister'])->name('showRegister');
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+Route::middleware([
+    AuthenticatedMiddleware::class,
+    RoleMiddleware::class . ':beheerder'
+])->group(function () {
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('showRegister');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
 
 
 Route::fallback(function () {

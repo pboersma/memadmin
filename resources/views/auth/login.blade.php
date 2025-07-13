@@ -40,12 +40,12 @@
                 Wachtwoord: <strong>beheerder!</strong>
                 <hr>
                 <strong>Gebruiker Secretaris</strong><br>
-                Email: <strong>penningmeester@memadmin.com</strong><br>
-                Wachtwoord: <strong>penningmeester!</strong>
-                <hr>
-                <strong>Gebruiker Penningmeester</strong><br>
                 Email: <strong>secretaris@memadmin.com</strong><br>
                 Wachtwoord: <strong>secretaris!</strong>
+                <hr>
+                <strong>Gebruiker Penningmeester</strong><br>
+                Email: <strong>penningmeester@memadmin.com</strong><br>
+                Wachtwoord: <strong>penningmeester!</strong>
             </div>
         </div>
     </div>

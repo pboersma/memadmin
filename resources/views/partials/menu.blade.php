@@ -48,7 +48,7 @@
     @endphp
 
     <ul class="nav nav-pills flex-column gap-1">
-        @if(array_intersect(['secretaris', 'beheerder'], $roles))
+        @if(array_intersect(['secretaris', 'penningmeester', 'beheerder'], $roles))
             <li class="nav-item">
                 <a href="{{ route('families.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('families.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">
@@ -61,6 +61,8 @@
                     <i class="fa-solid fa-users me-2"></i> Familieleden
                 </a>
             </li>
+        @endif
+        @if(array_intersect(['secretaris', 'beheerder'], $roles))
             <li class="nav-item">
                 <a href="{{ route('member_types.index') }}"
                     class="nav-link d-flex align-items-center px-3 py-2 rounded-pill {{ request()->routeIs('member_types.index') ? 'bg-primary text-white' : 'text-white text-opacity-75' }}">

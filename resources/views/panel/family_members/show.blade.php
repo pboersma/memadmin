@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
+    @php
+        $roles = array_map(fn($r) => $r->name, session('roles') ?? []);
+    @endphp
+
     <div class="container py-4">
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div
@@ -83,10 +87,12 @@
                 <hr class="my-4">
 
                 <div class="d-flex justify-content-end gap-2">
-                    <a href="{{ route('family_members.edit', $family_member->id) }}"
-                        class="btn btn-primary text-white rounded-pill px-4">
-                        <i class="fa-solid fa-pen-to-square me-1"></i> Bewerken
-                    </a>
+                    @if(array_intersect(['secretaris', 'beheerder'], $roles))
+                        <a href="{{ route('family_members.edit', $family_member->id) }}"
+                            class="btn btn-primary text-white rounded-pill px-4">
+                            <i class="fa-solid fa-pen-to-square me-1"></i> Bewerken
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

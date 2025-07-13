@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="container py-4">
+        @php
+            $roles = array_map(fn($r) => $r->name, session('roles') ?? []);
+        @endphp
+
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
                 <h5 class="mb-0 text-primary">
@@ -21,9 +25,11 @@
 
 
                 <div class="d-flex gap-2">
-                    <a href="{{ route('families.edit', $family->id) }}" class="btn btn-primary rounded-pill">
-                        <i class="fa-solid fa-pen-to-square me-1"></i> Bewerken
-                    </a>
+                    @if(array_intersect(['secretaris', 'beheerder'], $roles))
+                        <a href="{{ route('families.edit', $family->id) }}" class="btn btn-primary rounded-pill">
+                            <i class="fa-solid fa-pen-to-square me-1"></i> Bewerken
+                        </a>
+                    @endif
                     <a href="{{ route('families.index') }}" class="btn btn-secondary rounded-pill">
                         <i class="fa-solid fa-arrow-left me-1"></i> Terug
                     </a>
