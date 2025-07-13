@@ -2,11 +2,17 @@
 
 @section('content')
     <div class="container py-4">
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{{ route('family_members.create') }}" class="btn btn-primary rounded-pill shadow-sm">
-                <i class="fa-solid fa-plus me-2"></i> Nieuw Familielid
-            </a>
-        </div>
+        @php
+            $roles = array_map(fn($r) => $r->name, session('roles') ?? []);
+        @endphp
+
+        @if(array_intersect(['secretaris', 'beheerder'], $roles))
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{{ route('family_members.create') }}" class="btn btn-primary rounded-pill shadow-sm">
+                    <i class="fa-solid fa-plus me-2"></i> Nieuw Familielid
+                </a>
+            </div>
+        @endif
 
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-header bg-white border-bottom rounded-top-4 px-4 py-3">
@@ -53,16 +59,18 @@
                                                 class="btn btn-sm btn-outline-info rounded-pill">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('family_members.edit', $family_member->id) }}"
-                                                class="btn btn-sm btn-outline-primary rounded-pill">
-                                                <i class="fa-solid fa-pen"></i>
-                                            </a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill"
-                                                onclick="return confirm('Weet je zeker dat je dit familielid wilt verwijderen?')">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
+                                            @if(array_intersect(['secretaris', 'beheerder'], $roles))
+                                                <a href="{{ route('family_members.edit', $family_member->id) }}"
+                                                    class="btn btn-sm btn-outline-primary rounded-pill">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill"
+                                                    onclick="return confirm('Weet je zeker dat je dit familielid wilt verwijderen?')">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            @endif
                                         </form>
                                     </td>
                                 </tr>
